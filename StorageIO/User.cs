@@ -17,6 +17,6 @@ namespace StorageIO
 
     class Solder : User
     {
-        public List<Invoice> selfSells;
+        public List<SoldLog> selfSells;
     }
 }

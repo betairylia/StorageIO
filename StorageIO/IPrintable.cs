@@ -5,9 +5,8 @@ using System.Text;
 
 namespace StorageIO
 {
-    abstract class Invoice
+    interface IPrintable
     {
-        public abstract string print();
+        string print();
     }
-    //inherit!
 }

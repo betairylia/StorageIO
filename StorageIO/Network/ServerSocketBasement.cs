@@ -25,7 +25,7 @@ namespace StorageIO.Network
                 IPAddress ip = IPAddress.Parse(ipAddr);
                 serverSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
                 serverSocket.Bind(new IPEndPoint(ip, port));  //绑定IP地址：端口  
-                serverSocket.Listen(maxClients);    //设定最多10个排队连接请求  
+                serverSocket.Listen(maxClients);    //设定最多maxClient个排队连接请求  
 
                 Thread serverThread = new Thread(ListenClientConnect);
                 serverThread.Start();

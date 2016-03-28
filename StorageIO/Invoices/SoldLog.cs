@@ -3,15 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace StorageIO
+namespace StorageIO.Invoices
 {
-    class ProductStorage : IRowShowable
+    public class SoldLog : IPrintable, IRowShowable
     {
-        public Product m_product;
-        public DateTime importTime;
+        public string soldsmanName = "System";
+        public string comments = "";
 
-        public int storageID;
+        //IPrintable
+        public string print()
+        {
+            return "test";
+        }
 
+        //IRowShowable
         public List<KeyValueProp> ListAllProp()
         {
             return new List<KeyValueProp>();

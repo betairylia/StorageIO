@@ -5,14 +5,25 @@ using System.Text;
 
 namespace StorageIO
 {
-    abstract class Product
+    public abstract class Product : IRowShowable
     {
         public string productType { get; set; }//类型
         public string productClass { get; set; }//具体型号
-        public abstract List<KeyValueProp> listAllProp();
+        public Money importCost { get; set; }//进货金额
+
+        public List<KeyValueProp> ListAllProp()
+        {
+            //todo
+            return new List<KeyValueProp>();
+        }
+
+        public List<KeyValueProp> DoubleClicked()
+        {
+            return new List<KeyValueProp>();
+        }
     }
 
-    abstract class ProductWithMNo : Product
+    public abstract class ProductWithMNo : Product
     {
         public string MNo;
     }

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace StorageIO
 {
-    class KeyValueProp
+    public class KeyValueProp
     {
         public string key { get; set; }
         public string value { get; set; }

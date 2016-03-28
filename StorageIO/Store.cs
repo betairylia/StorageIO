@@ -3,11 +3,36 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using StorageIO.Invoices;
+
 namespace StorageIO
 {
-    class Store
+    //Table: 输出本仓库全部存货信息
+    //进库，出库，自动产生记录
+    public class Store
     {
-        //Table: 输出本仓库全部存货信息
-        //进库，出库，自动产生记录
+        public bool Import(Product product)
+        {
+            return false;
+        }
+
+        public bool Export(int productID)
+        {
+            return false;
+        }
+
+        public bool Exchange(Product inProduct, int outProductID)
+        {
+            return false;
+        }
+
+        public void SaveStorageToFile(string fileName)
+        {
+            //todo
+        }
+
+        List<ExportLog> exporeLogList;
+        List<ImportLog> importLogList;
+        List<ProductStorage> storageList;
     }
 }
