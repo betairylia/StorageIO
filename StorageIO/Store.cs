@@ -31,7 +31,7 @@ namespace StorageIO
             //todo
         }
 
-        List<ExportLog> exporeLogList;
+        List<ExportLog> exportLogList;
         List<ImportLog> importLogList;
         List<ProductStorage> storageList;
     }

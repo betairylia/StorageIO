@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Customer.cs" />
     <Compile Include="Invoices\ExportLog.cs" />
     <Compile Include="Invoices\ImportLog.cs" />
     <Compile Include="IPrintable.cs" />
@@ -74,6 +75,12 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Store.cs" />
+    <Compile Include="TableTestPage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TableTestPage.Designer.cs">
+      <DependentUpon>TableTestPage.cs</DependentUpon>
+    </Compile>
     <Compile Include="TableView.cs" />
     <Compile Include="ToolBox.cs" />
     <Compile Include="User.cs" />
@@ -89,6 +96,9 @@
     </Compile>
     <EmbeddedResource Include="socketTestPage.resx">
       <DependentUpon>socketTestPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TableTestPage.resx">
+      <DependentUpon>TableTestPage.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

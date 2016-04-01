@@ -5,13 +5,15 @@ using System.Text;
 
 namespace StorageIO
 {
-    public class ProductStorage : IRowShowable
+    public class Customer : IRowShowable, IPrintable
     {
-        public Product m_product;
-        public DateTime importTime;
+        //IPrintable
+        public string print()
+        {
+            return "test";
+        }
 
-        public int storageID;
-
+        //IRowShowable
         public List<KeyValueProp> ListAllProp()
         {
             return new List<KeyValueProp>();

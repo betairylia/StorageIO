@@ -13,7 +13,19 @@ namespace StorageIO
     /// </summary>
     public class serverMainHandler
     {
-        //todo
+        /// <summary>
+        /// 销售物品。
+        /// </summary>
+        /// <param name="store">要销售的物品所在的仓库</param>
+        /// <param name="target">要销售的物品</param>
+        /// <param name="cost">总售价</param>
+        /// <param name="customer">购买人</param>
+        /// <param name="Taxed">是否含税</param>
+        /// <returns>购买是否成功</returns>
+        public bool sold(Store store, List<ProductStorage> target, Money cost, Customer customer, bool Taxed)
+        {
+            return false;
+        }
 
         List<SoldLog> soldLogList;
     }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
 
 namespace StorageIO
 {
@@ -47,9 +48,18 @@ namespace StorageIO
         /// 添加一行
         /// </summary>
         /// <param name="row">要添加的行</param>
-        public void addRow(List<IRowShowable> row)
+        public void addRow(IRowShowable row)
         {
             //todo
+        }
+
+        /// <summary>
+        /// 添加数据
+        /// </summary>
+        /// <param name="data">要添加的数据</param>
+        public void add(List<IRowShowable> data)
+        {
+
         }
 
         /// <summary>
@@ -101,5 +111,7 @@ namespace StorageIO
         List<KeyValueProp> fliters;
         List<IRowShowable> dataStorage;
         ITableController controller;
+
+        DataGridView gridView;
     }
 }
