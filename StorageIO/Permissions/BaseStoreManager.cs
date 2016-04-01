@@ -5,7 +5,7 @@ using System.Text;
 
 namespace StorageIO.Permissions
 {
-    class BaseStoreManager : Permisson
+    public class BaseStoreManager : Permisson
     {
         public override void createUI()
         {

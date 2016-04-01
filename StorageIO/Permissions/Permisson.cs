@@ -5,7 +5,7 @@ using System.Text;
 
 namespace StorageIO
 {
-    abstract class Permisson
+    public abstract class Permisson
     {
         public abstract void createUI();
     }

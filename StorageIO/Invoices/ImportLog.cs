@@ -8,7 +8,16 @@ namespace StorageIO.Invoices
     class ImportLog : IPrintable, IRowShowable
     {
         public string operatorName = "System";
+        public ProductStorage importProduct;
         public string comments = "";
+
+        public ImportLog() { }
+
+        public ImportLog(ProductStorage _product, string _comment = "No comments")
+        {
+            importProduct = _product;
+            comments = _comment;
+        }
 
         //IPrintable
         public string print()
@@ -22,7 +31,7 @@ namespace StorageIO.Invoices
             return new List<KeyValueProp>();
         }
 
-        public List<KeyValueProp> DoubleClicked()
+        public object DoubleClicked()
         {
             return new List<KeyValueProp>();
         }

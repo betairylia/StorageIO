@@ -8,7 +8,8 @@ namespace StorageIO
     public class ProductStorage : IRowShowable
     {
         public Product m_product;
-        public DateTime importTime;
+        public DateTime importTime;//进货时间
+        public Money importCost { get; set; }//进货金额
 
         public int storageID;
 
@@ -17,7 +18,7 @@ namespace StorageIO
             return new List<KeyValueProp>();
         }
 
-        public List<KeyValueProp> DoubleClicked()
+        public object DoubleClicked()
         {
             return new List<KeyValueProp>();
         }

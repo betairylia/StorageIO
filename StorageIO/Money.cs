@@ -7,12 +7,12 @@ namespace StorageIO
 {
     public class Money
     {
-        Money()
+        public Money()
         {
             //ctor
         }
 
-        Money(double amount)
+        public Money(double amount)
         {
             realAmount = amount / exchangeRate;
         }

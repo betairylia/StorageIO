@@ -8,6 +8,7 @@ namespace StorageIO.Invoices
     class ExportLog : IPrintable, IRowShowable
     {
         public string operatorName = "System";
+        public DateTime exportTime;
         public string comments = "";
 
         //IPrintable
@@ -22,7 +23,7 @@ namespace StorageIO.Invoices
             return new List<KeyValueProp>();
         }
 
-        public List<KeyValueProp> DoubleClicked()
+        public object DoubleClicked()
         {
             return new List<KeyValueProp>();
         }

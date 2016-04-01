@@ -15,5 +15,7 @@ namespace StorageIO
         /// </summary>
         /// <param name="target">被双击的元素</param>
         void DoubleClicked(IRowShowable target);
+
+        List<IRowShowable> getTableRawData();
     }
 }

@@ -9,7 +9,6 @@ namespace StorageIO
     {
         public string productType { get; set; }//类型
         public string productClass { get; set; }//具体型号
-        public Money importCost { get; set; }//进货金额
 
         public List<KeyValueProp> ListAllProp()
         {
@@ -17,7 +16,7 @@ namespace StorageIO
             return new List<KeyValueProp>();
         }
 
-        public List<KeyValueProp> DoubleClicked()
+        public object DoubleClicked()
         {
             return new List<KeyValueProp>();
         }

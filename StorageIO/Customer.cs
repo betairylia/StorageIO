@@ -19,7 +19,7 @@ namespace StorageIO
             return new List<KeyValueProp>();
         }
 
-        public List<KeyValueProp> DoubleClicked()
+        public object DoubleClicked()
         {
             return new List<KeyValueProp>();
         }
