@@ -5,10 +5,12 @@ using System.Text;
 
 namespace StorageIO
 {
-    public abstract class Product : IRowShowable
+    public class Product : IRowShowable
     {
         public string productType { get; set; }//类型
         public string productClass { get; set; }//具体型号
+        public string MNo;
+        public bool hasMNo = false;
 
         public List<KeyValueProp> ListAllProp()
         {
@@ -20,10 +22,11 @@ namespace StorageIO
         {
             return new List<KeyValueProp>();
         }
-    }
 
-    public abstract class ProductWithMNo : Product
-    {
-        public string MNo;
+        public void setMNo(string _MNo)
+        {
+            MNo = _MNo;
+            hasMNo = true;
+        }
     }
 }

@@ -7,26 +7,48 @@ using System.Net.Sockets;
 using System.Net;
 using System.Threading;
 
+using StorageIO.Network.JSON;
+
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+
 namespace StorageIO.Network
 {
     public class ServerSocketBasement
     {
-        const int resultLenth = 2048;
+        const int resultLenth = 1024768;
 
         public static string ipAddr = "127.0.0.1";
         public static int port = 12580;
         public int maxClients = 10, nowClients = 0;
         Socket serverSocket;
+        serverMainHandler mainHandler;
+
+        public JsonSocketModule[] modules = new JsonSocketModule[16];
+        public bool[] isUsing = new bool[15];
 
         public bool Start()
         {
             try
             {
+                mainHandler = serverMainHandler.GetSingleton();
+
                 IPAddress ip = IPAddress.Parse(ipAddr);
                 serverSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
                 serverSocket.Bind(new IPEndPoint(ip, port));  //绑定IP地址：端口  
                 serverSocket.Listen(maxClients);    //设定最多maxClient个排队连接请求  
 
+                //注册JsonSocketModule模块
+                modules[(int)workType.STORE_IMPORT] = new ImportToStore();
+                ((ImportToStore)modules[(int)workType.STORE_IMPORT]).store = mainHandler.GetStore();
+
+                modules[(int)workType.STORE_EXPORT] = new ExportFromStore();
+                ((ExportFromStore)modules[(int)workType.STORE_EXPORT]).store = mainHandler.GetStore();
+
+                modules[(int)workType.STORE_VIEW_PRODUCT] = new ViewStoreProduct();
+                ((ViewStoreProduct)modules[(int)workType.STORE_VIEW_PRODUCT]).store = mainHandler.GetStore();
+
+                //开启监听
                 Thread serverThread = new Thread(ListenClientConnect);
                 serverThread.Start();
 
@@ -58,9 +80,9 @@ namespace StorageIO.Network
         {
             while (true)
             {
+                //监听到客户端连接，开启新线程处理客户端的消息
                 Socket clientSocket = serverSocket.Accept();
                 nowClients++;
-                //clientSocket.Send(Encoding.ASCII.GetBytes("Server Say Hello"));
                 Thread receiveThread = new Thread(RecieveClientMessage);
                 receiveThread.Start(clientSocket);
             }
@@ -70,13 +92,23 @@ namespace StorageIO.Network
         {
             Socket targetClientSocket = (Socket)clientSocket;
             byte[] result = new byte[resultLenth];
+            int len = 0;
+
             while (true)
             {
                 try
                 {
                     //通过clientSocket接收数据
-                    targetClientSocket.Receive(result);
-                    targetClientSocket.Send(result);
+                    len = targetClientSocket.Receive(result);
+
+                    string jsonString = Encoding.Default.GetString(result, 0, len);
+
+                    JObject jobj = JObject.Parse(jsonString);
+
+                    //找到相应的模块进行处理
+                    string response = modules[(int)jobj["type"]].GetObjectServer(jsonString);
+
+                    targetClientSocket.Send(Encoding.Default.GetBytes(response));
                     result = new byte[resultLenth];
                 }
                 catch (Exception ex)

@@ -36,7 +36,7 @@ namespace StorageIO.Network
 
         public void SendToServer(string jsonString)
         {
-            clientSocket.Send(Encoding.ASCII.GetBytes(jsonString));
+            clientSocket.Send(Encoding.Default.GetBytes(jsonString));
             return;
         }
 
@@ -50,7 +50,7 @@ namespace StorageIO.Network
         {
             result = new byte[resultLenth];
             int len = clientSocket.Receive(result);
-            return Encoding.ASCII.GetString(result, 0, len);
+            return Encoding.Default.GetString(result, 0, len);
         }
     }
 }

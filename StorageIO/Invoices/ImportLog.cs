@@ -13,9 +13,10 @@ namespace StorageIO.Invoices
 
         public ImportLog() { }
 
-        public ImportLog(ProductStorage _product, string _comment = "No comments")
+        public ImportLog(ProductStorage _product, string _comment = "", string userName = "系统")
         {
             importProduct = _product;
+            operatorName = userName;
             comments = _comment;
         }
 

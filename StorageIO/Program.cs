@@ -7,6 +7,7 @@ namespace StorageIO
 {
     static class Program
     {
+        public static bool isServer = false;
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -15,7 +16,7 @@ namespace StorageIO
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new TableTestPage());
+            Application.Run(new socketTestPage());
         }
     }
 }

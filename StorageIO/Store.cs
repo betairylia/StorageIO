@@ -17,7 +17,7 @@ namespace StorageIO
         /// <param name="product">进的货物</param>
         /// <param name="cost">进货价</param>
         /// <returns>是否成功</returns>
-        public bool Import(Product product, Money cost)
+        public bool Import(Product product, Money cost, string comments = "", string userName = "系统")
         {
             try
             {
@@ -28,9 +28,9 @@ namespace StorageIO
                 pStorage.importTime = DateTime.Now;
                 
                 ImportLog log = new ImportLog(pStorage);
-                importLogList.Add(log);
 
                 storageList.Add(pStorage);
+                importLogList.Add(log);
                 return true;
             }
             catch (Exception e)
@@ -45,12 +45,16 @@ namespace StorageIO
         /// </summary>
         /// <param name="product">出货的货物</param>
         /// <returns>是否成功</returns>
-        public bool Export(ProductStorage product)
+        public bool Export(ProductStorage product, string comments = "", string userName = "系统")
         {
             try
             {
-                //exportLog
-                return storageList.Remove(product);
+                ExportLog log = new ExportLog(product.m_product, comments, userName);
+                
+                if (!storageList.Remove(product)) return false;
+
+                exportLogList.Add(log);
+                return true;
             }
             catch (Exception ex)
             {
@@ -65,7 +69,7 @@ namespace StorageIO
         /// <param name="inProduct">退进来的货</param>
         /// <param name="outProduct">拿出去的货</param>
         /// <returns>是否成功</returns>
-        public bool Exchange(Product inProduct, ProductStorage outProduct)
+        public bool Exchange(Product inProduct, ProductStorage outProduct, string comments = "", string userName = "系统")
         {
             try
             {
@@ -116,8 +120,13 @@ namespace StorageIO
             return raw;
         }
 
-        List<ExportLog> exportLogList;
-        List<ImportLog> importLogList;
-        List<ProductStorage> storageList;
+        public List<ProductStorage> getStorageRawData()
+        {
+            return storageList;
+        }
+
+        List<ExportLog> exportLogList = new List<ExportLog>();
+        List<ImportLog> importLogList = new List<ImportLog>();
+        List<ProductStorage> storageList = new List<ProductStorage>();
     }
 }

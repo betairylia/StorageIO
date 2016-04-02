@@ -10,14 +10,20 @@ using System.Windows.Forms;
 using System.Threading;
 
 using StorageIO.Network;
+using StorageIO.Network.JSON;
+
+using Newtonsoft.Json.Linq;
 
 namespace StorageIO
 {
     public partial class socketTestPage : Form
     {
-        public bool isServer = true;
+        public bool isServer = false;
         public ServerSocketBasement server;
         public ClientSocketBasement client;
+
+        ViewStoreProduct tmp2;
+        User usr;
 
         public socketTestPage()
         {
@@ -31,10 +37,46 @@ namespace StorageIO
                 requestBtn.Enabled = false;
                 requestIDTextBox.Enabled = false;
                 requestIDTextBox.Text = "Server mode";
+
+                Product pro = new Product();
+                pro.productType = "变频器";
+                pro.productClass = "GD10-0R2G-S2-B";
+                pro.setMNo("I01161002599");
+
+                Money cny = new Money(10.0);
+
+                User usr = new User();
+                usr.userName = "张三";
+                usr.userPass = "123123";
+                usr.m_userType = userType.USER_SUPERADMIN;
+
+                Store store = serverMainHandler.GetSingleton().GetStore();
+
+                ImportToStore tmp = new ImportToStore();
+                tmp.product = pro;
+                tmp.cost = cny;
+                tmp.user = usr;
+                tmp.store = store;
+
+                string req = tmp.GenerateObjectClient();
+                string res1 = tmp.GetObjectServer(req);
+                string res2 = tmp.GetObjectServer(req);
+                string res3 = tmp.GetObjectServer(req);
+                string res4 = tmp.GetObjectServer(req);
+
+                MessageBox.Show("Request: \n" + req + "\n\nResponse1:\n" + res1 + "\n\nResponse2:\n" + res2 + "\n\nResponse3:\n" + res3 + "\n\nResponse4:\n" + res4);
             }
             else
             {
                 client = new ClientSocketBasement();
+
+                usr = new User();
+                usr.userName = "张三";
+                usr.userPass = "123123";
+                usr.m_userType = userType.USER_SUPERADMIN;
+
+                tmp2 = new ViewStoreProduct();
+                tmp2.user = usr;
             }
         }
 
@@ -65,10 +107,11 @@ namespace StorageIO
 
         private void requestBtn_Click(object sender, EventArgs e)
         {
-            string testString = requestIDTextBox.Text;
+            /*string testString = requestIDTextBox.Text;
             Console.WriteLine("request: " + testString);
             
-            resLabel.Text = client.SendToServerAndWait(testString);
+            resLabel.Text = client.SendToServerAndWait(testString);*/
+            MessageBox.Show(client.SendToServerAndWait(tmp2.GenerateObjectClient()));
         }
     }
 }

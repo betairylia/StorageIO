@@ -13,6 +13,11 @@ namespace StorageIO
     /// </summary>
     public class serverMainHandler
     {
+        serverMainHandler()
+        {
+            storeList.Add(new Store());
+        }
+
         /// <summary>
         /// 销售物品。
         /// </summary>
@@ -49,7 +54,15 @@ namespace StorageIO
 
         }
 
-        List<SoldLog> soldLogList;
-        List<Store> storeList;
+        List<SoldLog> soldLogList = new List<SoldLog>();
+        List<Store> storeList = new List<Store>();
+
+        public static serverMainHandler Singleton;
+        public static serverMainHandler GetSingleton()
+        {
+            if (Singleton == null)
+                Singleton = new serverMainHandler();
+            return Singleton;
+        }
     }
 }
