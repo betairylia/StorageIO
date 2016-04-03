@@ -8,14 +8,94 @@ namespace StorageIO
 {
     public class TableView
     {
+        class Fliter
+        {
+            public Fliter(KeyValueProp p, char t)
+            {
+                prop = p;
+                type = t;
+            }
+
+            public KeyValueProp prop;
+            public char type;
+
+            public bool check(List<KeyValueProp> obj)
+            {
+                if (type == 'd') { return true; }//这个过滤器不起作用
+
+                bool flag = true;
+                foreach(KeyValueProp p in obj)
+                {
+                    if (p.type == prop.type && p.key == prop.key)
+                    {
+                        switch (p.type)
+                        {
+                            case keyType.KEY_STRING:
+                                return ((StringKeyValueProp)p) == ((StringKeyValueProp)prop);
+                            case keyType.KEY_NUMBER:
+                                switch(type)
+                                {
+                                    case '<':
+                                        return ((NumberKeyValueProp)p) < ((NumberKeyValueProp)prop);
+                                    case '>':
+                                        return ((NumberKeyValueProp)p) > ((NumberKeyValueProp)prop);
+                                    case '=':
+                                        return ((NumberKeyValueProp)p) == ((NumberKeyValueProp)prop);
+                                    default:
+                                        return false;
+                                }
+                            case keyType.KEY_DATETIME:
+                                switch (type)
+                                {
+                                    case '<':
+                                        return ((DateTimeKeyValueProp)p) < ((DateTimeKeyValueProp)prop);
+                                    case '>':
+                                        return ((DateTimeKeyValueProp)p) > ((DateTimeKeyValueProp)prop);
+                                    case '=':
+                                        return ((DateTimeKeyValueProp)p) == ((DateTimeKeyValueProp)prop);
+                                    default:
+                                        return false;
+                                }
+                            default:
+                                return false;
+                        }
+                    }
+                }
+                return flag;
+            }
+        }
+
         /// <summary>
         /// 给某个键添加过滤器，过滤器可以同时存在多个。如果这个键已经有过滤器了则会被覆盖。
         /// </summary>
         /// <param name="key">过滤器的键值</param>
         /// <param name="value">过滤器的值</param>
-        public void setFliter(string key, string value)
+        public void setFliter(string key, object value, char type)
         {
-            //todo
+            try
+            {
+                int index = columns.FindIndex((c) => { return c == key; });
+
+                fliters[index].type = type;
+
+                switch (types[index])
+                {
+                    case keyType.KEY_STRING:
+                        ((StringKeyValueProp)fliters[index].prop).value = (string)value;
+                        return;
+                    case keyType.KEY_NUMBER:
+                        ((NumberKeyValueProp)fliters[index].prop).value = (double)value;
+                        return;
+                    case keyType.KEY_DATETIME:
+                        ((DateTimeKeyValueProp)fliters[index].prop).value = (DateTime)value;
+                        return;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return;
+            }
         }
 
         /// <summary>
@@ -33,6 +113,34 @@ namespace StorageIO
         public void clearFliters()
         {
             //todo
+        }
+
+        /// <summary>
+        /// 根据过滤器生成showProps
+        /// </summary>
+        public void flushFliters()
+        {
+            showProps.Clear();
+
+            foreach(IRowShowable row in dataStorage)
+            {
+                bool flag = true;
+                List<KeyValueProp> props = row.ListAllProp();
+
+                foreach (Fliter fliter in fliters)
+                {
+                    if (!fliter.check(props))
+                    {
+                        flag = false;
+                        break;
+                    }
+                }
+
+                if(flag)
+                {
+                    showProps.Add(row);
+                }
+            }
         }
 
         /// <summary>
@@ -67,7 +175,7 @@ namespace StorageIO
         /// </summary>
         public void clear()
         {
-            //todo
+            dataStorage.Clear();
         }
 
         /// <summary>
@@ -94,8 +202,155 @@ namespace StorageIO
         /// </summary>
         public void flushView()
         {
-            //todo
+            //显示
+            //清除所有行
+            gridView.Rows.Clear();
+
+            //添加行
+            DataGridViewRow row;
+            foreach(IRowShowable listRow in showProps)
+            {
+                row = new DataGridViewRow();
+                row.CreateCells(gridView);
+
+                List<KeyValueProp> listProp = listRow.ListAllProp();
+
+                for (int i = 0; i < listProp.Count; i++) 
+                {
+                    row.Cells[i].Value = listProp[i].ToString();
+                }
+
+                gridView.Rows.Add(row);
+            }
         }
+
+        public void init()
+        {
+            //绑定gridView的各种事件
+            gridView.CellDoubleClick += GridView_CellDoubleClick;
+            gridView.CellClick += GridView_CellClick;
+
+            //获得列信息
+            columns = controller.getColumns();
+            types = controller.getTypes();
+
+            //设置过滤器种类
+            fliters = new List<Fliter>();
+
+            for (int i = 0; i < columns.Count; i++)
+            {
+                KeyValueProp p;
+                if (types[i] == keyType.KEY_STRING) { p = new StringKeyValueProp(columns[i], ""); }
+                else if (types[i] == keyType.KEY_NUMBER) { p = new NumberKeyValueProp(columns[i], 0.0); }
+                else { p = new DateTimeKeyValueProp(columns[i], DateTime.Now); }
+
+                Fliter fliter = new Fliter(p, 'd');
+                fliters.Add(fliter);
+            }
+
+            //设置只读
+            gridView.ReadOnly = true;
+
+            //移除空行
+            gridView.AllowUserToAddRows = false;
+
+            //添加列
+            DataGridViewTextBoxColumn col;
+            foreach (string s in columns)
+            {
+                col = new DataGridViewTextBoxColumn();
+                col.Name = s;
+                col.HeaderText = s;
+
+                gridView.Columns.Add(col);
+            }
+
+            showProps = new List<IRowShowable>();
+        }
+
+        public void flushData()
+        {
+            //获得数据
+            dataStorage = controller.getTableRawData();
+        }
+
+        /// <summary>
+        /// 刷新全部信息
+        /// </summary>
+        public void flushAll()
+        {
+            flushData();
+            flushFliters();
+            flushView();
+        }
+
+        #region 各种事件
+
+        public delegate void IRowShowableSelected(object sender, IRowShowable selected);
+        public event IRowShowableSelected RowSelected;
+        public event IRowShowableSelected RowDoubleClicked;
+        
+        private void GridView_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0) return;
+            
+            if(RowSelected != null)
+                RowSelected(sender, showProps[e.RowIndex]);
+        }
+
+        int doubleClickIndex = -1;
+
+        private void GridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (doubleClickIndex > 0) { return; }
+
+            if (e.ColumnIndex < 0) { return; }
+
+            if (e.RowIndex < 0)
+            {
+                FliterSettingPage fliterSet = new FliterSettingPage(
+                    types[e.ColumnIndex],
+                    fliters[e.ColumnIndex].type.ToString(),
+                    fliters[e.ColumnIndex].prop.getValue(),
+                    fliters[e.ColumnIndex].prop.key);
+
+                doubleClickIndex = e.ColumnIndex;
+
+                fliterSet.FormClosed += FliterSet_FormClosed;
+                fliterSet.FliterSetted += FliterSet_FliterSetted;
+
+                fliterSet.Show();
+            }
+            else
+            {
+                if(RowDoubleClicked != null)
+                    RowDoubleClicked(sender, showProps[e.RowIndex]);
+            }
+        }
+
+        private void FliterSet_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            doubleClickIndex = -1;
+            this.flushFliters();
+            this.flushView();
+        }
+
+        private void FliterSet_FliterSetted(object sender, char type, object value)
+        {
+            fliters[doubleClickIndex].type = type;
+
+            if(type != 'd')
+            {
+                fliters[doubleClickIndex].prop.setValue(value);
+                gridView.Columns[doubleClickIndex].DefaultCellStyle.BackColor = System.Drawing.Color.Aqua;
+            }
+            else
+            {
+                gridView.Columns[doubleClickIndex].DefaultCellStyle.BackColor = System.Drawing.Color.White;
+            }
+        }
+
+        #endregion
 
         /// <summary>
         /// 直接获得表内的数据，请谨慎使用。
@@ -108,10 +363,15 @@ namespace StorageIO
 
         //触发器：双击某一行会触发这一行中对象的DoubleClicked()，并返回给表管理器该对象的索引。
 
-        List<KeyValueProp> fliters;
-        List<IRowShowable> dataStorage;
-        ITableController controller;
+        List<Fliter> fliters;
 
-        DataGridView gridView;
+        List<IRowShowable> showProps;
+        List<string> columns;
+        List<keyType> types;
+
+        List<IRowShowable> dataStorage;
+        public ITableController controller;
+
+        public DataGridView gridView;
     }
 }

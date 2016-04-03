@@ -11,18 +11,20 @@ using StorageIO.Network.JSON;
 
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.Windows.Forms;
 
 namespace StorageIO.Network
 {
     public class ServerSocketBasement
     {
-        const int resultLenth = 1024768;
+        const int resultLenth = 16777216;
 
         public static string ipAddr = "127.0.0.1";
         public static int port = 12580;
         public int maxClients = 10, nowClients = 0;
         Socket serverSocket;
         serverMainHandler mainHandler;
+        public ServerPage page;
 
         public JsonSocketModule[] modules = new JsonSocketModule[16];
         public bool[] isUsing = new bool[15];
@@ -100,6 +102,7 @@ namespace StorageIO.Network
                 {
                     //通过clientSocket接收数据
                     len = targetClientSocket.Receive(result);
+                    Console.WriteLine(len.ToString());
 
                     string jsonString = Encoding.Default.GetString(result, 0, len);
 
@@ -107,6 +110,8 @@ namespace StorageIO.Network
 
                     //找到相应的模块进行处理
                     string response = modules[(int)jobj["type"]].GetObjectServer(jsonString);
+
+                    Console.WriteLine(response.Length.ToString());
 
                     targetClientSocket.Send(Encoding.Default.GetBytes(response));
                     result = new byte[resultLenth];

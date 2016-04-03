@@ -8,7 +8,7 @@ namespace StorageIO
     /// <summary>
     /// 表呈现器TableView对应的事件控制器。
     /// </summary>
-    interface ITableController
+    public interface ITableController
     {
         /// <summary>
         /// 处理表中元素被双击的事件。
@@ -17,5 +17,7 @@ namespace StorageIO
         void DoubleClicked(IRowShowable target);
 
         List<IRowShowable> getTableRawData();
+        List<string> getColumns();
+        List<keyType> getTypes();
     }
 }

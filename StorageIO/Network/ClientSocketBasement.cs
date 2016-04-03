@@ -11,7 +11,7 @@ namespace StorageIO.Network
 {
     public class ClientSocketBasement
     {
-        const int resultLenth = 2048;
+        const int resultLenth = 16777216;
         byte[] result = new byte[resultLenth];
         public static int port = 12580;
         Socket clientSocket;
@@ -50,6 +50,7 @@ namespace StorageIO.Network
         {
             result = new byte[resultLenth];
             int len = clientSocket.Receive(result);
+
             return Encoding.Default.GetString(result, 0, len);
         }
     }

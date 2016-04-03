@@ -16,7 +16,17 @@ namespace StorageIO
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new socketTestPage());
+
+            if(isServer)
+            {
+                Application.Run(new LoginPage());
+            }
+            else
+            {
+                Application.Run(new LoginPage());
+            }
+
+            Application.Exit();
         }
     }
 }

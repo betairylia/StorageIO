@@ -15,7 +15,13 @@ namespace StorageIO
 
         public List<KeyValueProp> ListAllProp()
         {
-            return new List<KeyValueProp>();
+            List<KeyValueProp> result = new List<KeyValueProp>();
+
+            result.AddRange(m_product.ListAllProp());
+            result.Add(new DateTimeKeyValueProp("入库时间", importTime));
+            result.Add(new NumberKeyValueProp("交易金额", importCost.realAmount));
+
+            return result;
         }
 
         public object DoubleClicked()

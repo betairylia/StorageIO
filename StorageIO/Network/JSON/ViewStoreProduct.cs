@@ -44,7 +44,7 @@ namespace StorageIO.Network.JSON
                     simpleRes.state = networkState.SERVER_FAIL_AUTHORISING;
                     return JsonHelper.SerializeObject(simpleRes);
                 }
-
+                
                 simpleRes.products = store.getStorageRawData();
                 simpleRes.state = networkState.SERVER_SUCCESS;
 

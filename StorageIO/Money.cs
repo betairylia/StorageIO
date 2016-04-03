@@ -27,7 +27,7 @@ namespace StorageIO
 
         public override string ToString()
         {
-            return base.ToString();
+            return "￥ " + realAmount.ToString("0.00");
         }
     }
 }

@@ -14,8 +14,21 @@ namespace StorageIO
 
         public List<KeyValueProp> ListAllProp()
         {
-            //todo
-            return new List<KeyValueProp>();
+            List<KeyValueProp> result = new List<KeyValueProp>();
+            
+            result.Add(new StringKeyValueProp("产品类型", productType));
+            result.Add(new StringKeyValueProp("产品型号", productClass));
+
+            if (hasMNo)
+            {
+                result.Add(new StringKeyValueProp("产品机号", MNo));
+            }
+            else
+            {
+                result.Add(new StringKeyValueProp("产品机号", "无机号"));
+            }
+
+            return result;
         }
 
         public object DoubleClicked()

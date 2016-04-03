@@ -52,13 +52,32 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ClientPage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ClientPage.Designer.cs">
+      <DependentUpon>ClientPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ClientTables\ProductView.cs" />
     <Compile Include="Customer.cs" />
+    <Compile Include="FliterSettingPage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FliterSettingPage.Designer.cs">
+      <DependentUpon>FliterSettingPage.cs</DependentUpon>
+    </Compile>
     <Compile Include="Invoices\ExportLog.cs" />
     <Compile Include="Invoices\ImportLog.cs" />
     <Compile Include="IPrintable.cs" />
     <Compile Include="IRowShowable.cs" />
     <Compile Include="ITableController.cs" />
     <Compile Include="JsonHelper.cs" />
+    <Compile Include="LoginPage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LoginPage.Designer.cs">
+      <DependentUpon>LoginPage.cs</DependentUpon>
+    </Compile>
     <Compile Include="Network\JSON\ExportFromStore.cs" />
     <Compile Include="Network\JSON\ImportToStore.cs" />
     <Compile Include="Network\JSON\JsonSocketModule.cs" />
@@ -75,25 +94,40 @@
     <Compile Include="Permissions\SuperAdmin.cs" />
     <Compile Include="Product.cs" />
     <Compile Include="ProductStorage.cs" />
-    <Compile Include="serverMainHandler.cs" />
-    <Compile Include="socketTestPage.cs">
+    <Compile Include="ServerPage.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="socketTestPage.Designer.cs">
+    <Compile Include="ServerPage.Designer.cs">
+      <DependentUpon>ServerPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="serverMainHandler.cs" />
+    <Compile Include="TestPages\socketTestPage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TestPages\socketTestPage.Designer.cs">
       <DependentUpon>socketTestPage.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Store.cs" />
-    <Compile Include="TableTestPage.cs">
+    <Compile Include="TestPages\TableTestPage.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="TableTestPage.Designer.cs">
+    <Compile Include="TestPages\TableTestPage.Designer.cs">
       <DependentUpon>TableTestPage.cs</DependentUpon>
     </Compile>
     <Compile Include="TableView.cs" />
     <Compile Include="ToolBox.cs" />
     <Compile Include="User.cs" />
+    <EmbeddedResource Include="ClientPage.resx">
+      <DependentUpon>ClientPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FliterSettingPage.resx">
+      <DependentUpon>FliterSettingPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LoginPage.resx">
+      <DependentUpon>LoginPage.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -104,12 +138,16 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="socketTestPage.resx">
+    <EmbeddedResource Include="ServerPage.resx">
+      <DependentUpon>ServerPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TestPages\socketTestPage.resx">
       <DependentUpon>socketTestPage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="TableTestPage.resx">
+    <EmbeddedResource Include="TestPages\TableTestPage.resx">
       <DependentUpon>TableTestPage.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="ClassDiagram1.cd" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

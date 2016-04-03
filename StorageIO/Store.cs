@@ -9,7 +9,7 @@ namespace StorageIO
 {
     //Table: 输出本仓库全部存货信息
     //进库，出库，自动产生记录
-    public class Store : ITableController
+    public class Store
     {
         /// <summary>
         /// 进货
@@ -102,23 +102,23 @@ namespace StorageIO
             //todo
         }
 
-        public void DoubleClicked(IRowShowable target)
-        {
-            ProductStorage productSelected = (ProductStorage)target;
-            //弹出窗口显示详细信息
-        }
+        //public void DoubleClicked(IRowShowable target)
+        //{
+        //    ProductStorage productSelected = (ProductStorage)target;
+        //    //弹出窗口显示详细信息
+        //}
 
-        public List<IRowShowable> getTableRawData()
-        {
-            List<IRowShowable> raw = new List<IRowShowable>();
+        //public List<IRowShowable> getTableRawData()
+        //{
+        //    List<IRowShowable> raw = new List<IRowShowable>();
 
-            foreach (ProductStorage cell in storageList)
-            {
-                raw.Add(cell);
-            }
+        //    foreach (ProductStorage cell in storageList)
+        //    {
+        //        raw.Add(cell);
+        //    }
 
-            return raw;
-        }
+        //    return raw;
+        //}
 
         public List<ProductStorage> getStorageRawData()
         {

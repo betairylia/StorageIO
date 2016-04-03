@@ -14,21 +14,29 @@ namespace StorageIO.Network.JSON
 {
     public enum workType
     {
-        STORE_IMPORT = 1,
-        STORE_EXPORT = 2,
-        STORE_EXCHANGE = 3,
-        STORE_BACK = 4,//退货
-        SELL = 5,
-        STORE_VIEW_PRODUCT = 6,
-        STORE_VIEW_IMPORTLOG = 7,
-        STORE_VIEW_EXPORTLOG = 8,
-        SOLDER_VIEW_SOLDLOG = 9,
-        ADMIN_VIEW_SOLDLOG = 10,
-        SAVE_ALL_MANULLY = 11,
-        CHANGE_PASSWORD = 12,
-        CHANGE_PERMISSION = 13,
-        CREATE_USER = 14,
-        LOGIN_TEST = 15
+        STORE_IMPORT = 1,           //进货
+        STORE_EXPORT = 2,           //出货
+        STORE_EXCHANGE = 3,         //换货
+        STORE_BACK = 4,             //退货
+        SELL = 5,                   //销售
+        STORE_VIEW_PRODUCT = 6,     //查看库存
+        STORE_VIEW_IMPORTLOG = 7,   //查看入库记录
+        STORE_VIEW_EXPORTLOG = 8,   //查看出库记录
+        SOLDER_VIEW_SOLDLOG = 9,    //查看销售记录（个人）
+        ADMIN_VIEW_SOLDLOG = 10,    //查看销售记录（管理员）
+        SAVE_ALL_MANULLY = 11,      //保存全部信息
+        CHANGE_PASSWORD = 12,       //用户更改密码
+        CHANGE_PERMISSION = 13,     //更改权限
+        CREATE_USER = 14,           //创建用户
+        GET_PREMISSION = 15,        //登录并获取权限
+        SOLDER_VIEW_CUSTOMER = 16,  //查看客户列表（个人）
+        ADMIN_VIEW_CUSTOMER = 17,   //查看客户列表（管理员）
+        VIEW_ALL_USERS = 18,        //查看用户列表
+        CHANGE_PRODUCTS = 19,       //更改产品
+        CHANGE_IMPORTLOG = 20,      //更改入库信息
+        CHANGE_EXPORTLOG = 21,      //更改出库信息
+        CHANGE_CUSTOMER = 22,       //更改客户信息
+        CHANGE_SOLDLOG = 23,        //更改销售记录
     }
 
     public enum networkState
