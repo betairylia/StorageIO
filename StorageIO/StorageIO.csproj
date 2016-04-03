@@ -58,6 +58,7 @@
     <Compile Include="ClientPage.Designer.cs">
       <DependentUpon>ClientPage.cs</DependentUpon>
     </Compile>
+    <Compile Include="ClientTables\ImportLogView.cs" />
     <Compile Include="ClientTables\ProductView.cs" />
     <Compile Include="Customer.cs" />
     <Compile Include="FliterSettingPage.cs">
@@ -85,6 +86,7 @@
     <Compile Include="Invoices\SoldLog.cs" />
     <Compile Include="Money.cs" />
     <Compile Include="Network\ClientSocketBasement.cs" />
+    <Compile Include="Network\JSON\ViewImportLog.cs" />
     <Compile Include="Network\JSON\ViewStoreProduct.cs" />
     <Compile Include="Network\ServerSocketBasement.cs" />
     <Compile Include="Permissions\Admin.cs" />

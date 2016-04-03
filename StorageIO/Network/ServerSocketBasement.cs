@@ -50,6 +50,9 @@ namespace StorageIO.Network
                 modules[(int)workType.STORE_VIEW_PRODUCT] = new ViewStoreProduct();
                 ((ViewStoreProduct)modules[(int)workType.STORE_VIEW_PRODUCT]).store = mainHandler.GetStore();
 
+                modules[(int)workType.STORE_VIEW_IMPORTLOG] = new ViewImportLog();
+                ((ViewImportLog)modules[(int)workType.STORE_VIEW_IMPORTLOG]).store = mainHandler.GetStore();
+
                 //开启监听
                 Thread serverThread = new Thread(ListenClientConnect);
                 serverThread.Start();

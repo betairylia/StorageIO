@@ -69,6 +69,25 @@
             this.labelShowProductMNo = new System.Windows.Forms.TextBox();
             this.labelShowImportTime = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.importLogTab_dataGridView = new System.Windows.Forms.DataGridView();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.importLogViewShowImportTime = new System.Windows.Forms.TextBox();
+            this.importLogViewShowProductMNo = new System.Windows.Forms.TextBox();
+            this.importLogViewShowImportCost = new System.Windows.Forms.TextBox();
+            this.importLogViewShowProductClass = new System.Windows.Forms.TextBox();
+            this.importLogViewShowProductType = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.importLogViewShowImportUser = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.importLogViewShowComments = new System.Windows.Forms.TextBox();
+            this.importLogViewPrintCurrentBtn = new System.Windows.Forms.Button();
+            this.importLogViewPrintAllBtn = new System.Windows.Forms.Button();
             this.mainTabPanel.SuspendLayout();
             this.storeManagementTab.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -76,6 +95,10 @@
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.productGridView_00)).BeginInit();
+            this.import.SuspendLayout();
+            this.groupBox5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.importLogTab_dataGridView)).BeginInit();
+            this.groupBox6.SuspendLayout();
             this.SuspendLayout();
             // 
             // mainTabPanel
@@ -348,12 +371,15 @@
             // 
             // import
             // 
+            this.import.Controls.Add(this.groupBox6);
+            this.import.Controls.Add(this.groupBox5);
             this.import.Location = new System.Drawing.Point(4, 22);
             this.import.Name = "import";
             this.import.Size = new System.Drawing.Size(976, 679);
             this.import.TabIndex = 5;
             this.import.Text = "入库记录";
             this.import.UseVisualStyleBackColor = true;
+            this.import.Enter += new System.EventHandler(this.import_Enter);
             // 
             // export
             // 
@@ -521,6 +547,218 @@
             this.label3.TabIndex = 12;
             this.label3.Text = "可以选中并复制";
             // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.importLogTab_dataGridView);
+            this.groupBox5.Location = new System.Drawing.Point(3, 3);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(708, 667);
+            this.groupBox5.TabIndex = 2;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "入库记录清单";
+            // 
+            // importLogTab_dataGridView
+            // 
+            this.importLogTab_dataGridView.AllowUserToAddRows = false;
+            this.importLogTab_dataGridView.AllowUserToDeleteRows = false;
+            this.importLogTab_dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.importLogTab_dataGridView.Location = new System.Drawing.Point(6, 20);
+            this.importLogTab_dataGridView.MultiSelect = false;
+            this.importLogTab_dataGridView.Name = "importLogTab_dataGridView";
+            this.importLogTab_dataGridView.RowTemplate.Height = 23;
+            this.importLogTab_dataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.importLogTab_dataGridView.Size = new System.Drawing.Size(696, 641);
+            this.importLogTab_dataGridView.TabIndex = 0;
+            // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.importLogViewPrintAllBtn);
+            this.groupBox6.Controls.Add(this.importLogViewPrintCurrentBtn);
+            this.groupBox6.Controls.Add(this.importLogViewShowComments);
+            this.groupBox6.Controls.Add(this.label13);
+            this.groupBox6.Controls.Add(this.importLogViewShowImportUser);
+            this.groupBox6.Controls.Add(this.label12);
+            this.groupBox6.Controls.Add(this.label8);
+            this.groupBox6.Controls.Add(this.label7);
+            this.groupBox6.Controls.Add(this.label6);
+            this.groupBox6.Controls.Add(this.label5);
+            this.groupBox6.Controls.Add(this.label4);
+            this.groupBox6.Controls.Add(this.importLogViewShowImportTime);
+            this.groupBox6.Controls.Add(this.importLogViewShowProductMNo);
+            this.groupBox6.Controls.Add(this.importLogViewShowImportCost);
+            this.groupBox6.Controls.Add(this.importLogViewShowProductClass);
+            this.groupBox6.Controls.Add(this.importLogViewShowProductType);
+            this.groupBox6.Location = new System.Drawing.Point(717, 3);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(256, 667);
+            this.groupBox6.TabIndex = 3;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "入库记录详细内容";
+            // 
+            // importLogViewShowImportTime
+            // 
+            this.importLogViewShowImportTime.BackColor = System.Drawing.SystemColors.Window;
+            this.importLogViewShowImportTime.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.importLogViewShowImportTime.Location = new System.Drawing.Point(80, 112);
+            this.importLogViewShowImportTime.Name = "importLogViewShowImportTime";
+            this.importLogViewShowImportTime.ReadOnly = true;
+            this.importLogViewShowImportTime.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.importLogViewShowImportTime.Size = new System.Drawing.Size(160, 14);
+            this.importLogViewShowImportTime.TabIndex = 17;
+            this.importLogViewShowImportTime.Text = "<入库时间>";
+            // 
+            // importLogViewShowProductMNo
+            // 
+            this.importLogViewShowProductMNo.BackColor = System.Drawing.SystemColors.Window;
+            this.importLogViewShowProductMNo.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.importLogViewShowProductMNo.Location = new System.Drawing.Point(91, 68);
+            this.importLogViewShowProductMNo.Name = "importLogViewShowProductMNo";
+            this.importLogViewShowProductMNo.ReadOnly = true;
+            this.importLogViewShowProductMNo.Size = new System.Drawing.Size(149, 14);
+            this.importLogViewShowProductMNo.TabIndex = 16;
+            this.importLogViewShowProductMNo.Text = "<产品机号>";
+            this.importLogViewShowProductMNo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // importLogViewShowImportCost
+            // 
+            this.importLogViewShowImportCost.BackColor = System.Drawing.SystemColors.Window;
+            this.importLogViewShowImportCost.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.importLogViewShowImportCost.Location = new System.Drawing.Point(116, 90);
+            this.importLogViewShowImportCost.Name = "importLogViewShowImportCost";
+            this.importLogViewShowImportCost.ReadOnly = true;
+            this.importLogViewShowImportCost.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.importLogViewShowImportCost.Size = new System.Drawing.Size(124, 14);
+            this.importLogViewShowImportCost.TabIndex = 15;
+            this.importLogViewShowImportCost.Text = "<进货价格>";
+            // 
+            // importLogViewShowProductClass
+            // 
+            this.importLogViewShowProductClass.BackColor = System.Drawing.SystemColors.Window;
+            this.importLogViewShowProductClass.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.importLogViewShowProductClass.Location = new System.Drawing.Point(91, 46);
+            this.importLogViewShowProductClass.Name = "importLogViewShowProductClass";
+            this.importLogViewShowProductClass.ReadOnly = true;
+            this.importLogViewShowProductClass.Size = new System.Drawing.Size(149, 14);
+            this.importLogViewShowProductClass.TabIndex = 14;
+            this.importLogViewShowProductClass.Text = "<产品型号>";
+            this.importLogViewShowProductClass.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // importLogViewShowProductType
+            // 
+            this.importLogViewShowProductType.BackColor = System.Drawing.SystemColors.Window;
+            this.importLogViewShowProductType.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.importLogViewShowProductType.Location = new System.Drawing.Point(116, 24);
+            this.importLogViewShowProductType.Name = "importLogViewShowProductType";
+            this.importLogViewShowProductType.ReadOnly = true;
+            this.importLogViewShowProductType.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.importLogViewShowProductType.Size = new System.Drawing.Size(124, 14);
+            this.importLogViewShowProductType.TabIndex = 13;
+            this.importLogViewShowProductType.Text = "<产品类型>";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(11, 24);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(65, 12);
+            this.label4.TabIndex = 18;
+            this.label4.Text = "产品类型：";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(11, 46);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(65, 12);
+            this.label5.TabIndex = 19;
+            this.label5.Text = "产品型号：";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(11, 90);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(65, 12);
+            this.label6.TabIndex = 20;
+            this.label6.Text = "进货价格：";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(11, 69);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(65, 12);
+            this.label7.TabIndex = 21;
+            this.label7.Text = "产品机号：";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(11, 112);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(65, 12);
+            this.label8.TabIndex = 22;
+            this.label8.Text = "入库时间：";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(11, 134);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(65, 12);
+            this.label12.TabIndex = 23;
+            this.label12.Text = "操 作 员：";
+            // 
+            // importLogViewShowImportUser
+            // 
+            this.importLogViewShowImportUser.BackColor = System.Drawing.SystemColors.Window;
+            this.importLogViewShowImportUser.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.importLogViewShowImportUser.Location = new System.Drawing.Point(80, 134);
+            this.importLogViewShowImportUser.Name = "importLogViewShowImportUser";
+            this.importLogViewShowImportUser.ReadOnly = true;
+            this.importLogViewShowImportUser.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.importLogViewShowImportUser.Size = new System.Drawing.Size(160, 14);
+            this.importLogViewShowImportUser.TabIndex = 24;
+            this.importLogViewShowImportUser.Text = "<操 作 员>";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(11, 161);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(65, 12);
+            this.label13.TabIndex = 25;
+            this.label13.Text = "备    注：";
+            // 
+            // importLogViewShowComments
+            // 
+            this.importLogViewShowComments.BackColor = System.Drawing.SystemColors.Window;
+            this.importLogViewShowComments.Location = new System.Drawing.Point(13, 181);
+            this.importLogViewShowComments.Multiline = true;
+            this.importLogViewShowComments.Name = "importLogViewShowComments";
+            this.importLogViewShowComments.ReadOnly = true;
+            this.importLogViewShowComments.Size = new System.Drawing.Size(227, 422);
+            this.importLogViewShowComments.TabIndex = 26;
+            this.importLogViewShowComments.Text = "无内容";
+            // 
+            // importLogViewPrintCurrentBtn
+            // 
+            this.importLogViewPrintCurrentBtn.Location = new System.Drawing.Point(13, 609);
+            this.importLogViewPrintCurrentBtn.Name = "importLogViewPrintCurrentBtn";
+            this.importLogViewPrintCurrentBtn.Size = new System.Drawing.Size(227, 23);
+            this.importLogViewPrintCurrentBtn.TabIndex = 27;
+            this.importLogViewPrintCurrentBtn.Text = "打印当前";
+            this.importLogViewPrintCurrentBtn.UseVisualStyleBackColor = true;
+            // 
+            // importLogViewPrintAllBtn
+            // 
+            this.importLogViewPrintAllBtn.Location = new System.Drawing.Point(13, 638);
+            this.importLogViewPrintAllBtn.Name = "importLogViewPrintAllBtn";
+            this.importLogViewPrintAllBtn.Size = new System.Drawing.Size(227, 23);
+            this.importLogViewPrintAllBtn.TabIndex = 28;
+            this.importLogViewPrintAllBtn.Text = "打印全部（符合条件的）";
+            this.importLogViewPrintAllBtn.UseVisualStyleBackColor = true;
+            // 
             // ClientPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -539,6 +777,11 @@
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.productGridView_00)).EndInit();
+            this.import.ResumeLayout(false);
+            this.groupBox5.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.importLogTab_dataGridView)).EndInit();
+            this.groupBox6.ResumeLayout(false);
+            this.groupBox6.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -586,5 +829,24 @@
         private System.Windows.Forms.TextBox labelShowProductClass;
         private System.Windows.Forms.TextBox labelShowImportTime;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.DataGridView importLogTab_dataGridView;
+        private System.Windows.Forms.GroupBox groupBox6;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox importLogViewShowImportTime;
+        private System.Windows.Forms.TextBox importLogViewShowProductMNo;
+        private System.Windows.Forms.TextBox importLogViewShowImportCost;
+        private System.Windows.Forms.TextBox importLogViewShowProductClass;
+        private System.Windows.Forms.TextBox importLogViewShowProductType;
+        private System.Windows.Forms.TextBox importLogViewShowImportUser;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.TextBox importLogViewShowComments;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Button importLogViewPrintAllBtn;
+        private System.Windows.Forms.Button importLogViewPrintCurrentBtn;
     }
 }

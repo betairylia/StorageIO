@@ -5,7 +5,7 @@ using System.Text;
 
 namespace StorageIO.Invoices
 {
-    class ImportLog : IPrintable, IRowShowable
+    public class ImportLog : IPrintable, IRowShowable
     {
         public string operatorName = "System";
         public ProductStorage importProduct;
@@ -29,7 +29,13 @@ namespace StorageIO.Invoices
         //IRowShowable
         public List<KeyValueProp> ListAllProp()
         {
-            return new List<KeyValueProp>();
+            List<KeyValueProp> result = new List<KeyValueProp>();
+
+            result.AddRange(importProduct.ListAllProp());
+            result.Add(new StringKeyValueProp("操作员", operatorName));
+            result.Add(new StringKeyValueProp("备注", comments));
+
+            return result;
         }
 
         public object DoubleClicked()

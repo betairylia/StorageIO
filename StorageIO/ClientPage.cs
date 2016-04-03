@@ -1,4 +1,5 @@
 ﻿using StorageIO.ClientTables;
+using StorageIO.Invoices;
 using StorageIO.Network;
 using StorageIO.Network.JSON;
 using System;
@@ -306,6 +307,69 @@ namespace StorageIO
 
         #endregion
 
+        #region “入库记录”页 —— importLogViewTab(01)
+
+        bool importLogViewTab_Entered = false;
+
+        TableView importLogViewTab_tableView = new TableView();
+        ImportLogView importLogViewTab_importLogView = new ImportLogView();
+        ViewImportLog importLogViewTab_viewImportLog = new ViewImportLog();
+        ViewImportReturns importLogViewTab_viewImportReturns = new ViewImportReturns();
+
+        private void import_Enter(object sender, EventArgs e)
+        {
+            if (!importLogViewTab_Entered)
+            {
+                #region 初始化库存清单
+
+                //创建tableView并绑定
+                importLogViewTab_tableView.gridView = importLogTab_dataGridView;
+                importLogViewTab_tableView.controller = importLogViewTab_importLogView;
+
+                //创建ViewImportLog（JsonSocketModule）
+                importLogViewTab_viewImportLog.user = m_user;
+
+                //初始化tableView
+                importLogViewTab_tableView.init();
+
+                //给这个tableView绑定事件
+                importLogViewTab_tableView.RowSelected += ImportLogViewTab_tableView_RowSelected;
+
+                #endregion
+            }
+            importLogViewTab_Entered = true;
+
+            ImportLogViewTab_GetStoreDataFromServer();
+        }
+
+        private void ImportLogViewTab_tableView_RowSelected(object sender, IRowShowable selected)
+        {
+            ImportLog log = (ImportLog)selected;
+
+            importLogViewShowProductType.Text = log.importProduct.m_product.productType;
+            importLogViewShowProductClass.Text = log.importProduct.m_product.productClass;
+            importLogViewShowProductMNo.Text = log.importProduct.m_product.MNo;
+            importLogViewShowImportCost.Text = log.importProduct.importCost.ToString();
+            importLogViewShowImportTime.Text = log.importProduct.importTime.ToString();
+            importLogViewShowImportUser.Text = log.operatorName;
+            importLogViewShowComments.Text = log.comments;
+        }
+
+        //从服务器读取库存清单并刷新显示
+        private void ImportLogViewTab_GetStoreDataFromServer()
+        {
+            //向服务器发送请求并接收请求
+            importLogViewTab_viewImportReturns = JsonHelper.DeserializeJsonToObject<ViewImportReturns>(
+                client.SendToServerAndWait(importLogViewTab_viewImportLog.GenerateObjectClient()));
+
+            //给productView赋值
+            importLogViewTab_importLogView.logs = importLogViewTab_viewImportReturns.logs;
+
+            //呈现视图
+            importLogViewTab_tableView.flushAll();
+        }
+
+        #endregion
 
     }
 }

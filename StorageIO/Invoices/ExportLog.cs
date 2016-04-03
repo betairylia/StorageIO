@@ -5,7 +5,7 @@ using System.Text;
 
 namespace StorageIO.Invoices
 {
-    class ExportLog : IPrintable, IRowShowable
+    public class ExportLog : IPrintable, IRowShowable
     {
         public string operatorName = "System";
         public DateTime exportTime;

@@ -27,7 +27,7 @@ namespace StorageIO
                 pStorage.importCost = cost;
                 pStorage.importTime = DateTime.Now;
                 
-                ImportLog log = new ImportLog(pStorage);
+                ImportLog log = new ImportLog(pStorage, comments, userName);
 
                 storageList.Add(pStorage);
                 importLogList.Add(log);
@@ -136,8 +136,8 @@ namespace StorageIO
             return storageList;
         }
 
-        List<ExportLog> exportLogList = new List<ExportLog>();
-        List<ImportLog> importLogList = new List<ImportLog>();
-        List<ProductStorage> storageList = new List<ProductStorage>();
+        public List<ExportLog> exportLogList = new List<ExportLog>();
+        public List<ImportLog> importLogList = new List<ImportLog>();
+        public List<ProductStorage> storageList = new List<ProductStorage>();
     }
 }
