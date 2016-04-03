@@ -28,5 +28,15 @@ namespace StorageIO
         {
             return new List<KeyValueProp>();
         }
+
+        public static bool operator ==(ProductStorage l, ProductStorage r)
+        {
+            return (l.m_product == r.m_product && l.importCost.realAmount == r.importCost.realAmount && l.importTime == r.importTime);
+        }
+
+        public static bool operator !=(ProductStorage l, ProductStorage r)
+        {
+            return !(l == r);
+        }
     }
 }

@@ -41,5 +41,15 @@ namespace StorageIO
             MNo = _MNo;
             hasMNo = true;
         }
+
+        public static bool operator ==(Product l, Product r)
+        {
+            return (l.productType == r.productType && l.productClass == r.productClass && l.MNo == r.MNo);
+        }
+
+        public static bool operator !=(Product l, Product r)
+        {
+            return !(l == r);
+        }
     }
 }

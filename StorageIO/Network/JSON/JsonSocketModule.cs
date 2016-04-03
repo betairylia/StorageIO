@@ -14,12 +14,12 @@ namespace StorageIO.Network.JSON
 {
     public enum workType
     {
-        STORE_IMPORT = 1,           //进货
-        STORE_EXPORT = 2,           //出货
-        STORE_EXCHANGE = 3,         //换货
-        STORE_BACK = 4,             //退货
-        SELL = 5,                   //销售
-        STORE_VIEW_PRODUCT = 6,     //查看库存
+        STORE_IMPORT = 1,           //进货                            //Completed
+        STORE_EXPORT = 2,           //出货                            //Completed
+        STORE_EXCHANGE = 3,         //换货（废弃）                    //Completed
+        STORE_BACK = 4,             //退货（废弃）                    //Completed
+        SELL = 5,                   //销售                            
+        STORE_VIEW_PRODUCT = 6,     //查看库存                        //Completed
         STORE_VIEW_IMPORTLOG = 7,   //查看入库记录
         STORE_VIEW_EXPORTLOG = 8,   //查看出库记录
         SOLDER_VIEW_SOLDLOG = 9,    //查看销售记录（个人）
@@ -37,6 +37,9 @@ namespace StorageIO.Network.JSON
         CHANGE_EXPORTLOG = 21,      //更改出库信息
         CHANGE_CUSTOMER = 22,       //更改客户信息
         CHANGE_SOLDLOG = 23,        //更改销售记录
+        PRODUCT_TYPECLASS_LIST = 24,//查看产品类型清单
+        CREATE_CUSTOMER = 25,       //创建新客户
+        DELETE_CUSTOMER = 26,       //删除客户
     }
 
     public enum networkState
@@ -77,6 +80,7 @@ namespace StorageIO.Network.JSON
         protected userType minPermission;
         public workType type;
         public User user;
+        public string comments;
 
         public abstract string GenerateObjectClient();
         public abstract string GetObjectServer(string jsonString);

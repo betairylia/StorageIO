@@ -25,6 +25,7 @@ namespace StorageIO.Network.JSON
             JsonObject obj = new JsonObject();
             obj.type = type;
             obj.user = user;
+            obj.comments = comments;
 
             string s = JsonHelper.SerializeObject(obj);
             return s;

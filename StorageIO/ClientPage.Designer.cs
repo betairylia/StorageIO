@@ -31,29 +31,24 @@
             this.mainTabPanel = new System.Windows.Forms.TabControl();
             this.storeManagementTab = new System.Windows.Forms.TabPage();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.BtnExchange = new System.Windows.Forms.Button();
+            this.BtnBack = new System.Windows.Forms.Button();
             this.请输入退换货备注 = new System.Windows.Forms.TextBox();
             this.请输入联系方式 = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.button2 = new System.Windows.Forms.Button();
+            this.BtnExport = new System.Windows.Forms.Button();
             this.请输入出库备注 = new System.Windows.Forms.TextBox();
-            this.labelShowProductMNo = new System.Windows.Forms.Label();
-            this.labelShowImportTime = new System.Windows.Forms.Label();
-            this.labelShowProductCost = new System.Windows.Forms.Label();
-            this.labelShowProductClass = new System.Windows.Forms.Label();
-            this.labelShowProductType = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.请输入进货价格 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.BtnImport = new System.Windows.Forms.Button();
             this.请输入入库备注 = new System.Windows.Forms.TextBox();
             this.请输入产品机号 = new System.Windows.Forms.TextBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.请选择产品型号 = new System.Windows.Forms.ComboBox();
+            this.请选择产品种类 = new System.Windows.Forms.ComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.productGridView_00 = new System.Windows.Forms.DataGridView();
             this.import = new System.Windows.Forms.TabPage();
@@ -67,6 +62,13 @@
             this.adminPage_customer = new System.Windows.Forms.TabPage();
             this.adminPage_sold = new System.Windows.Forms.TabPage();
             this.superadmin_Users = new System.Windows.Forms.TabPage();
+            this.label2 = new System.Windows.Forms.Label();
+            this.labelShowProductType = new System.Windows.Forms.TextBox();
+            this.labelShowProductClass = new System.Windows.Forms.TextBox();
+            this.labelShowProductCost = new System.Windows.Forms.TextBox();
+            this.labelShowProductMNo = new System.Windows.Forms.TextBox();
+            this.labelShowImportTime = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.mainTabPanel.SuspendLayout();
             this.storeManagementTab.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -113,8 +115,8 @@
             // 
             // groupBox4
             // 
-            this.groupBox4.Controls.Add(this.button4);
-            this.groupBox4.Controls.Add(this.button3);
+            this.groupBox4.Controls.Add(this.BtnExchange);
+            this.groupBox4.Controls.Add(this.BtnBack);
             this.groupBox4.Controls.Add(this.请输入退换货备注);
             this.groupBox4.Controls.Add(this.请输入联系方式);
             this.groupBox4.Controls.Add(this.label11);
@@ -127,23 +129,25 @@
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "退换货";
             // 
-            // button4
+            // BtnExchange
             // 
-            this.button4.Location = new System.Drawing.Point(128, 200);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(116, 23);
-            this.button4.TabIndex = 8;
-            this.button4.Text = "换货";
-            this.button4.UseVisualStyleBackColor = true;
+            this.BtnExchange.Location = new System.Drawing.Point(128, 200);
+            this.BtnExchange.Name = "BtnExchange";
+            this.BtnExchange.Size = new System.Drawing.Size(116, 23);
+            this.BtnExchange.TabIndex = 8;
+            this.BtnExchange.Text = "换货";
+            this.BtnExchange.UseVisualStyleBackColor = true;
+            this.BtnExchange.Click += new System.EventHandler(this.BtnExchange_Click);
             // 
-            // button3
+            // BtnBack
             // 
-            this.button3.Location = new System.Drawing.Point(6, 200);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(116, 23);
-            this.button3.TabIndex = 7;
-            this.button3.Text = "退货";
-            this.button3.UseVisualStyleBackColor = true;
+            this.BtnBack.Location = new System.Drawing.Point(6, 200);
+            this.BtnBack.Name = "BtnBack";
+            this.BtnBack.Size = new System.Drawing.Size(116, 23);
+            this.BtnBack.TabIndex = 7;
+            this.BtnBack.Text = "退货";
+            this.BtnBack.UseVisualStyleBackColor = true;
+            this.BtnBack.Click += new System.EventHandler(this.BtnBack_Click);
             // 
             // 请输入退换货备注
             // 
@@ -192,13 +196,15 @@
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.button2);
-            this.groupBox3.Controls.Add(this.请输入出库备注);
-            this.groupBox3.Controls.Add(this.labelShowProductMNo);
+            this.groupBox3.BackColor = System.Drawing.Color.Transparent;
+            this.groupBox3.Controls.Add(this.label3);
             this.groupBox3.Controls.Add(this.labelShowImportTime);
+            this.groupBox3.Controls.Add(this.labelShowProductMNo);
             this.groupBox3.Controls.Add(this.labelShowProductCost);
             this.groupBox3.Controls.Add(this.labelShowProductClass);
             this.groupBox3.Controls.Add(this.labelShowProductType);
+            this.groupBox3.Controls.Add(this.BtnExport);
+            this.groupBox3.Controls.Add(this.请输入出库备注);
             this.groupBox3.Controls.Add(this.label1);
             this.groupBox3.Location = new System.Drawing.Point(720, 229);
             this.groupBox3.Name = "groupBox3";
@@ -207,14 +213,15 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "出库";
             // 
-            // button2
+            // BtnExport
             // 
-            this.button2.Location = new System.Drawing.Point(8, 180);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(237, 23);
-            this.button2.TabIndex = 6;
-            this.button2.Text = "确定出库（请仔细核对信息！）";
-            this.button2.UseVisualStyleBackColor = true;
+            this.BtnExport.Location = new System.Drawing.Point(8, 180);
+            this.BtnExport.Name = "BtnExport";
+            this.BtnExport.Size = new System.Drawing.Size(237, 23);
+            this.BtnExport.TabIndex = 6;
+            this.BtnExport.Text = "确定出库（请仔细核对信息！）";
+            this.BtnExport.UseVisualStyleBackColor = true;
+            this.BtnExport.Click += new System.EventHandler(this.BtnExport_Click);
             // 
             // 请输入出库备注
             // 
@@ -225,53 +232,6 @@
             this.请输入出库备注.Size = new System.Drawing.Size(237, 73);
             this.请输入出库备注.TabIndex = 6;
             this.请输入出库备注.Text = "请输入出库备注";
-            // 
-            // labelShowProductMNo
-            // 
-            this.labelShowProductMNo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelShowProductMNo.Location = new System.Drawing.Point(106, 60);
-            this.labelShowProductMNo.Name = "labelShowProductMNo";
-            this.labelShowProductMNo.Size = new System.Drawing.Size(138, 12);
-            this.labelShowProductMNo.TabIndex = 6;
-            this.labelShowProductMNo.Text = "<产品机号>";
-            this.labelShowProductMNo.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
-            // labelShowImportTime
-            // 
-            this.labelShowImportTime.AutoSize = true;
-            this.labelShowImportTime.Location = new System.Drawing.Point(6, 82);
-            this.labelShowImportTime.Name = "labelShowImportTime";
-            this.labelShowImportTime.Size = new System.Drawing.Size(65, 12);
-            this.labelShowImportTime.TabIndex = 5;
-            this.labelShowImportTime.Text = "<入库时间>";
-            // 
-            // labelShowProductCost
-            // 
-            this.labelShowProductCost.AutoSize = true;
-            this.labelShowProductCost.Location = new System.Drawing.Point(6, 60);
-            this.labelShowProductCost.Name = "labelShowProductCost";
-            this.labelShowProductCost.Size = new System.Drawing.Size(65, 12);
-            this.labelShowProductCost.TabIndex = 4;
-            this.labelShowProductCost.Text = "<交易金额>";
-            // 
-            // labelShowProductClass
-            // 
-            this.labelShowProductClass.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelShowProductClass.Location = new System.Drawing.Point(106, 39);
-            this.labelShowProductClass.Name = "labelShowProductClass";
-            this.labelShowProductClass.Size = new System.Drawing.Size(138, 12);
-            this.labelShowProductClass.TabIndex = 3;
-            this.labelShowProductClass.Text = "<产品型号>";
-            this.labelShowProductClass.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
-            // labelShowProductType
-            // 
-            this.labelShowProductType.AutoSize = true;
-            this.labelShowProductType.Location = new System.Drawing.Point(6, 39);
-            this.labelShowProductType.Name = "labelShowProductType";
-            this.labelShowProductType.Size = new System.Drawing.Size(65, 12);
-            this.labelShowProductType.TabIndex = 2;
-            this.labelShowProductType.Text = "<产品类型>";
             // 
             // label1
             // 
@@ -284,14 +244,18 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.BackColor = System.Drawing.Color.Transparent;
+            this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.Controls.Add(this.请输入进货价格);
-            this.groupBox2.Controls.Add(this.button1);
+            this.groupBox2.Controls.Add(this.BtnImport);
             this.groupBox2.Controls.Add(this.请输入入库备注);
             this.groupBox2.Controls.Add(this.请输入产品机号);
-            this.groupBox2.Controls.Add(this.comboBox2);
-            this.groupBox2.Controls.Add(this.comboBox1);
+            this.groupBox2.Controls.Add(this.请选择产品型号);
+            this.groupBox2.Controls.Add(this.请选择产品种类);
+            this.groupBox2.ForeColor = System.Drawing.SystemColors.ControlText;
             this.groupBox2.Location = new System.Drawing.Point(720, 6);
             this.groupBox2.Name = "groupBox2";
+            this.groupBox2.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.groupBox2.Size = new System.Drawing.Size(250, 217);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
@@ -301,18 +265,19 @@
             // 
             this.请输入进货价格.Location = new System.Drawing.Point(7, 101);
             this.请输入进货价格.Name = "请输入进货价格";
-            this.请输入进货价格.Size = new System.Drawing.Size(237, 21);
+            this.请输入进货价格.Size = new System.Drawing.Size(215, 21);
             this.请输入进货价格.TabIndex = 5;
             this.请输入进货价格.Text = "请输入进货价格";
             // 
-            // button1
+            // BtnImport
             // 
-            this.button1.Location = new System.Drawing.Point(7, 188);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(237, 23);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "确定入库（请仔细核对信息！）";
-            this.button1.UseVisualStyleBackColor = true;
+            this.BtnImport.Location = new System.Drawing.Point(7, 188);
+            this.BtnImport.Name = "BtnImport";
+            this.BtnImport.Size = new System.Drawing.Size(237, 23);
+            this.BtnImport.TabIndex = 4;
+            this.BtnImport.Text = "确定入库（请仔细核对信息！）";
+            this.BtnImport.UseVisualStyleBackColor = true;
+            this.BtnImport.Click += new System.EventHandler(this.BtnImport_Click);
             // 
             // 请输入入库备注
             // 
@@ -334,23 +299,29 @@
             this.请输入产品机号.TabIndex = 2;
             this.请输入产品机号.Text = "请输入产品机号";
             // 
-            // comboBox2
+            // 请选择产品型号
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(7, 47);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(237, 20);
-            this.comboBox2.TabIndex = 1;
-            this.comboBox2.Text = "请选择产品型号";
+            this.请选择产品型号.FormattingEnabled = true;
+            this.请选择产品型号.Location = new System.Drawing.Point(7, 47);
+            this.请选择产品型号.Name = "请选择产品型号";
+            this.请选择产品型号.Size = new System.Drawing.Size(237, 20);
+            this.请选择产品型号.TabIndex = 1;
+            this.请选择产品型号.Text = "请选择产品型号";
             // 
-            // comboBox1
+            // 请选择产品种类
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(6, 20);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(238, 20);
-            this.comboBox1.TabIndex = 0;
-            this.comboBox1.Text = "请选择产品种类";
+            this.请选择产品种类.FormattingEnabled = true;
+            this.请选择产品种类.Items.AddRange(new object[] {
+            "a",
+            "b",
+            "c",
+            "d",
+            "e"});
+            this.请选择产品种类.Location = new System.Drawing.Point(6, 20);
+            this.请选择产品种类.Name = "请选择产品种类";
+            this.请选择产品种类.Size = new System.Drawing.Size(238, 20);
+            this.请选择产品种类.TabIndex = 0;
+            this.请选择产品种类.Text = "请选择产品种类";
             // 
             // groupBox1
             // 
@@ -475,6 +446,81 @@
             this.superadmin_Users.Text = "账户管理";
             this.superadmin_Users.UseVisualStyleBackColor = true;
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(228, 104);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(17, 12);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "元";
+            // 
+            // labelShowProductType
+            // 
+            this.labelShowProductType.BackColor = System.Drawing.SystemColors.Window;
+            this.labelShowProductType.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.labelShowProductType.Location = new System.Drawing.Point(8, 39);
+            this.labelShowProductType.Name = "labelShowProductType";
+            this.labelShowProductType.ReadOnly = true;
+            this.labelShowProductType.Size = new System.Drawing.Size(100, 14);
+            this.labelShowProductType.TabIndex = 7;
+            this.labelShowProductType.Text = "<产品类型>";
+            // 
+            // labelShowProductClass
+            // 
+            this.labelShowProductClass.BackColor = System.Drawing.SystemColors.Window;
+            this.labelShowProductClass.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.labelShowProductClass.Location = new System.Drawing.Point(114, 39);
+            this.labelShowProductClass.Name = "labelShowProductClass";
+            this.labelShowProductClass.ReadOnly = true;
+            this.labelShowProductClass.Size = new System.Drawing.Size(125, 14);
+            this.labelShowProductClass.TabIndex = 8;
+            this.labelShowProductClass.Text = "<产品型号>";
+            this.labelShowProductClass.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // labelShowProductCost
+            // 
+            this.labelShowProductCost.BackColor = System.Drawing.SystemColors.Window;
+            this.labelShowProductCost.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.labelShowProductCost.Location = new System.Drawing.Point(8, 60);
+            this.labelShowProductCost.Name = "labelShowProductCost";
+            this.labelShowProductCost.ReadOnly = true;
+            this.labelShowProductCost.Size = new System.Drawing.Size(100, 14);
+            this.labelShowProductCost.TabIndex = 9;
+            this.labelShowProductCost.Text = "<进货价格>";
+            // 
+            // labelShowProductMNo
+            // 
+            this.labelShowProductMNo.BackColor = System.Drawing.SystemColors.Window;
+            this.labelShowProductMNo.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.labelShowProductMNo.Location = new System.Drawing.Point(114, 59);
+            this.labelShowProductMNo.Name = "labelShowProductMNo";
+            this.labelShowProductMNo.ReadOnly = true;
+            this.labelShowProductMNo.Size = new System.Drawing.Size(125, 14);
+            this.labelShowProductMNo.TabIndex = 10;
+            this.labelShowProductMNo.Text = "<产品机号>";
+            this.labelShowProductMNo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // labelShowImportTime
+            // 
+            this.labelShowImportTime.BackColor = System.Drawing.SystemColors.Window;
+            this.labelShowImportTime.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.labelShowImportTime.Location = new System.Drawing.Point(8, 81);
+            this.labelShowImportTime.Name = "labelShowImportTime";
+            this.labelShowImportTime.ReadOnly = true;
+            this.labelShowImportTime.Size = new System.Drawing.Size(136, 14);
+            this.labelShowImportTime.TabIndex = 11;
+            this.labelShowImportTime.Text = "<入库时间>";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(150, 81);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(89, 12);
+            this.label3.TabIndex = 12;
+            this.label3.Text = "可以选中并复制";
+            // 
             // ClientPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -514,29 +560,31 @@
         private System.Windows.Forms.TabPage superadmin_Users;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.Label labelShowProductClass;
-        private System.Windows.Forms.Label labelShowProductType;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.TextBox 请输入进货价格;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button BtnImport;
         private System.Windows.Forms.TextBox 请输入入库备注;
         private System.Windows.Forms.TextBox 请输入产品机号;
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox 请选择产品型号;
+        private System.Windows.Forms.ComboBox 请选择产品种类;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.DataGridView productGridView_00;
-        private System.Windows.Forms.Label labelShowProductMNo;
-        private System.Windows.Forms.Label labelShowImportTime;
-        private System.Windows.Forms.Label labelShowProductCost;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button BtnBack;
         private System.Windows.Forms.TextBox 请输入退换货备注;
         private System.Windows.Forms.TextBox 请输入联系方式;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button BtnExport;
         private System.Windows.Forms.TextBox 请输入出库备注;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button BtnExchange;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox labelShowProductType;
+        private System.Windows.Forms.TextBox labelShowProductMNo;
+        private System.Windows.Forms.TextBox labelShowProductCost;
+        private System.Windows.Forms.TextBox labelShowProductClass;
+        private System.Windows.Forms.TextBox labelShowImportTime;
+        private System.Windows.Forms.Label label3;
     }
 }

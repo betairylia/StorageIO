@@ -94,6 +94,7 @@
     <Compile Include="Permissions\SuperAdmin.cs" />
     <Compile Include="Product.cs" />
     <Compile Include="ProductStorage.cs" />
+    <Compile Include="ProductTypeClassManager.cs" />
     <Compile Include="ServerPage.cs">
       <SubType>Form</SubType>
     </Compile>

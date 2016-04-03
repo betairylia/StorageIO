@@ -50,8 +50,19 @@ namespace StorageIO
             try
             {
                 ExportLog log = new ExportLog(product.m_product, comments, userName);
-                
-                if (!storageList.Remove(product)) return false;
+
+                bool removed = false;
+                foreach(ProductStorage pro in storageList)
+                {
+                    if(pro == product)
+                    {
+                        removed = true;
+                        storageList.Remove(pro);
+                        break;
+                    }
+                }
+
+                if (!removed) return false;
 
                 exportLogList.Add(log);
                 return true;

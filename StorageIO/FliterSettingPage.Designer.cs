@@ -56,6 +56,7 @@
             this.fliterInputBox.Size = new System.Drawing.Size(376, 21);
             this.fliterInputBox.TabIndex = 1;
             this.fliterInputBox.Text = "请输入要查找的文字，所有包含这串文字的项目都会被显示出来。";
+            this.fliterInputBox.Enter += new System.EventHandler(this.fliterInputBox_Enter);
             // 
             // button1
             // 

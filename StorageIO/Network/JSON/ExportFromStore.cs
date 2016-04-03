@@ -28,6 +28,7 @@ namespace StorageIO.Network.JSON
             obj.type = type;
             obj.user = user;
             obj.product = product;
+            obj.comments = comments;
 
             string s = JsonHelper.SerializeObject(obj);
             return s;
@@ -48,7 +49,7 @@ namespace StorageIO.Network.JSON
                     return JsonHelper.SerializeObject(simpleRes);
                 }
 
-                if (store.Export(obj.product, obj.comments + "（操作：普通出货）", obj.user.userName))
+                if (store.Export(obj.product, obj.comments, obj.user.userName))
                 {
                     simpleRes.state = networkState.SERVER_SUCCESS;
                 }

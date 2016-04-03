@@ -121,9 +121,12 @@ namespace StorageIO
         public void flushFliters()
         {
             showProps.Clear();
+            int tmpCounter = 0;
 
             foreach(IRowShowable row in dataStorage)
             {
+                tmpCounter++;
+
                 bool flag = true;
                 List<KeyValueProp> props = row.ListAllProp();
 
@@ -206,6 +209,8 @@ namespace StorageIO
             //清除所有行
             gridView.Rows.Clear();
 
+            int tmpCounter = 0;
+
             //添加行
             DataGridViewRow row;
             foreach(IRowShowable listRow in showProps)
@@ -217,8 +222,11 @@ namespace StorageIO
 
                 for (int i = 0; i < listProp.Count; i++) 
                 {
-                    row.Cells[i].Value = listProp[i].ToString();
+                    row.Cells[i+1].Value = listProp[i].ToString();
                 }
+
+                row.Cells[0].Value = tmpCounter;
+                tmpCounter++;
 
                 gridView.Rows.Add(row);
             }
@@ -233,6 +241,10 @@ namespace StorageIO
             //获得列信息
             columns = controller.getColumns();
             types = controller.getTypes();
+
+            //添加第一列“序号”
+            columns.Insert(0, "序号");
+            types.Insert(0, keyType.KEY_NUMBER);
 
             //设置过滤器种类
             fliters = new List<Fliter>();
@@ -265,6 +277,12 @@ namespace StorageIO
                 gridView.Columns.Add(col);
             }
 
+            //设置第一列为int型
+            gridView.Columns[0].ValueType = typeof(int);
+
+            //设置第一列的颜色
+            gridView.Columns[0].DefaultCellStyle.BackColor = System.Drawing.Color.LightPink;
+
             showProps = new List<IRowShowable>();
         }
 
@@ -295,7 +313,10 @@ namespace StorageIO
             if (e.RowIndex < 0) return;
             
             if(RowSelected != null)
-                RowSelected(sender, showProps[e.RowIndex]);
+            {
+                int indexID = (int)(((DataGridView)sender).Rows[e.RowIndex].Cells[0].Value);
+                RowSelected(sender, showProps[indexID]);
+            }
         }
 
         int doubleClickIndex = -1;
@@ -304,7 +325,7 @@ namespace StorageIO
         {
             if (doubleClickIndex > 0) { return; }
 
-            if (e.ColumnIndex < 0) { return; }
+            if (e.ColumnIndex < 1) { return; }
 
             if (e.RowIndex < 0)
             {
@@ -331,8 +352,6 @@ namespace StorageIO
         private void FliterSet_FormClosed(object sender, FormClosedEventArgs e)
         {
             doubleClickIndex = -1;
-            this.flushFliters();
-            this.flushView();
         }
 
         private void FliterSet_FliterSetted(object sender, char type, object value)
@@ -348,6 +367,9 @@ namespace StorageIO
             {
                 gridView.Columns[doubleClickIndex].DefaultCellStyle.BackColor = System.Drawing.Color.White;
             }
+
+            this.flushFliters();
+            this.flushView();
         }
 
         #endregion

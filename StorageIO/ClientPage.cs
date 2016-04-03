@@ -39,6 +39,8 @@ namespace StorageIO
                 {
                     if (con.GetType().ToString() == "System.Windows.Forms.TextBox")
                     {
+                        if ((con as TextBox).BorderStyle == BorderStyle.None) continue;
+
                         (con as TextBox).Enter += TextBoxWithToolTip_Enter;
                         (con as TextBox).Leave += TextBoxWithToolTip_Leave;
                         (con as TextBox).Text = (con as TextBox).Name;
@@ -108,7 +110,11 @@ namespace StorageIO
         TableView storeManagementTab_tableView;
         ViewStoreProduct storeManagementTab_viewStoreProduct;
         ViewStoreReturns storeManagementTab_viewStoreReturns;
+        ProductStorage storeManagementTab_selectedProductStorage;
 
+        bool storeManagementTab_onBack = false, storeManagementTab_onChange = false;
+
+        //进入时
         private void storeManagementTab_Enter(object sender, EventArgs e)
         {
             if (!storeManagementTab_Entered)
@@ -137,8 +143,12 @@ namespace StorageIO
             }
             storeManagementTab_Entered = true;
 
-            #region 从服务器读取库存清单并刷新显示
+            StoreManagementTab_GetStoreDataFromServer();
+        }
 
+        //从服务器读取库存清单并刷新显示
+        private void StoreManagementTab_GetStoreDataFromServer()
+        {
             //向服务器发送请求并接收请求
             storeManagementTab_viewStoreReturns = JsonHelper.DeserializeJsonToObject<ViewStoreReturns>(
                 client.SendToServerAndWait(storeManagementTab_viewStoreProduct.GenerateObjectClient()));
@@ -148,22 +158,154 @@ namespace StorageIO
 
             //呈现视图
             storeManagementTab_tableView.flushAll();
-
-            #endregion
         }
 
         //选中了一行
         private void StoreManagementTab_tableView_RowSelected(object sender, IRowShowable selected)
         {
-            ProductStorage product = (ProductStorage)selected;
+            storeManagementTab_selectedProductStorage = (ProductStorage)selected;
 
-            labelShowProductType.Text    = product.m_product.productType;
-            labelShowProductClass.Text   = product.m_product.productClass;
-            labelShowProductMNo.Text     = product.m_product.MNo;
-            labelShowProductCost.Text    = product.importCost.ToString();
-            labelShowImportTime.Text     = product.importTime.ToString();
+            labelShowProductType.Text    = storeManagementTab_selectedProductStorage.m_product.productType;
+            labelShowProductClass.Text   = storeManagementTab_selectedProductStorage.m_product.productClass;
+            labelShowProductMNo.Text     = storeManagementTab_selectedProductStorage.m_product.MNo;
+            labelShowProductCost.Text    = storeManagementTab_selectedProductStorage.importCost.ToString();
+            labelShowImportTime.Text     = storeManagementTab_selectedProductStorage.importTime.ToString();
+        }
+
+        //入库
+        private void BtnImport_Click(object sender, EventArgs e)
+        {
+            ImportToStore importToStore = new ImportToStore();
+            importToStore.user = m_user;
+
+            if (storeManagementTab_onBack)
+            {
+                //追加退换货信息
+                importToStore.comments = "（退换货 - 联系方式：" + 请输入联系方式.Text + "）[ " + 请输入退换货备注.Text + " ] ";
+                storeManagementTab_onBack = false;
+
+                if(!(storeManagementTab_onBack || storeManagementTab_onChange))
+                {
+                    BtnBack.Enabled = true;
+                    BtnExchange.Enabled = true;
+                }
+
+                _UpdateColor00();
+            }
+            else
+            {
+                importToStore.comments = "";
+            }
+
+            Product tmpProductForImport = new Product();
+            tmpProductForImport.productType = 请选择产品种类.Text;
+            tmpProductForImport.productClass = 请选择产品型号.Text;
+            tmpProductForImport.hasMNo = ProductTypeClassManager.CheckIfHasMNo(请选择产品种类.Text);
+            tmpProductForImport.MNo = 请输入产品机号.Text;
+
+            if (请输入入库备注.Text != "请输入入库备注")
+            {
+                importToStore.comments += 请输入入库备注.Text;
+            }
+
+            importToStore.product = tmpProductForImport;
+            importToStore.cost = new Money(double.Parse(请输入进货价格.Text));
+            
+            //向服务器发送入库请求
+            ServerResponseWithoutBody simpleRes = JsonHelper.DeserializeJsonToObject<ServerResponseWithoutBody>(
+                client.SendToServerAndWait(JsonHelper.SerializeObject(importToStore)));
+
+            if(ToolBox.CheckServerResponse(simpleRes))
+            {
+                StoreManagementTab_GetStoreDataFromServer();
+            }
+        }
+
+        //出库
+        private void BtnExport_Click(object sender, EventArgs e)
+        {
+            ExportFromStore exportFromStore = new ExportFromStore();
+
+            if (storeManagementTab_onChange)
+            {
+                //追加退换货信息
+                exportFromStore.comments = "（退换货 - 联系方式：" + 请输入联系方式.Text + "）[ " + 请输入退换货备注.Text + " ] ";
+                storeManagementTab_onChange = false;
+
+                if (!(storeManagementTab_onBack || storeManagementTab_onChange))
+                {
+                    BtnBack.Enabled = true;
+                    BtnExchange.Enabled = true;
+                }
+
+                _UpdateColor00();
+            }
+            else
+            {
+                exportFromStore.comments = "";
+            }
+
+            if(请输入出库备注.Text != "请输入出库备注"){ exportFromStore.comments += 请输入出库备注.Text; }
+            exportFromStore.user = m_user;
+            exportFromStore.product = storeManagementTab_selectedProductStorage;
+
+            //向服务器发送出库请求
+            ServerResponseWithoutBody simpleRes = JsonHelper.DeserializeJsonToObject<ServerResponseWithoutBody>(
+                client.SendToServerAndWait(JsonHelper.SerializeObject(exportFromStore)));
+
+            if (ToolBox.CheckServerResponse(simpleRes))
+            {
+                StoreManagementTab_GetStoreDataFromServer();
+            }
+        }
+
+        //退货
+        private void BtnBack_Click(object sender, EventArgs e)
+        {
+            storeManagementTab_onBack = true;
+
+            BtnBack.Enabled = false;
+            BtnExchange.Enabled = false;
+
+            _UpdateColor00();
+        }
+
+        //换货
+        private void BtnExchange_Click(object sender, EventArgs e)
+        {
+            storeManagementTab_onBack = true;
+            storeManagementTab_onChange = true;
+
+            BtnBack.Enabled = false;
+            BtnExchange.Enabled = false;
+
+            _UpdateColor00();
+        }
+
+        //根据退换货流程更改出入库背景颜色
+        private void _UpdateColor00()
+        {
+            if (storeManagementTab_onBack)
+            {
+                groupBox2.BackColor = Color.CornflowerBlue;
+            }
+            else
+            {
+                groupBox2.BackColor = Color.Transparent;
+            }
+
+            if (storeManagementTab_onChange)
+            {
+                groupBox3.BackColor = Color.CornflowerBlue;
+            }
+            else
+            {
+                groupBox3.BackColor = Color.Transparent;
+            }
         }
 
         #endregion
+
+
     }
 }
