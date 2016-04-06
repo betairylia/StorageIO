@@ -27,9 +27,9 @@ namespace StorageIO
         /// <param name="customer">购买人</param>
         /// <param name="Taxed">是否含税</param>
         /// <returns>购买是否成功</returns>
-        public bool sold(Store store, List<ProductStorage> target, Money cost, Customer customer, bool Taxed, string solderName)
+        public bool sold(Store store, List<ProductStorage> target, List<Money> cost, Customer customer, bool Taxed, string solderName)
         {
-            if(User.GetUserByName(solderName).m_userType == userType.USER_SOLDER)
+            if(User.GetUserByName(solderName).m_userType >= userType.USER_SOLDER)
             {
                 SoldLog log = new SoldLog((Solder)User.GetUserByName(solderName), customer, store, target, cost, Taxed, "");
                 soldLogList.Add(log);
@@ -54,7 +54,8 @@ namespace StorageIO
 
         }
 
-        List<SoldLog> soldLogList = new List<SoldLog>();
+        public List<Customer> customerList = new List<Customer>();
+        public List<SoldLog> soldLogList = new List<SoldLog>();
         List<Store> storeList = new List<Store>();
 
         public static serverMainHandler Singleton;

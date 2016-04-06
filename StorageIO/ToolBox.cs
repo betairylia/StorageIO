@@ -25,7 +25,7 @@ namespace StorageIO
                     MessageBox.Show("操作成功！");
                     return true;
                 case networkState.SERVER_FAIL_AUTHORISING:
-                    MessageBox.Show("用户认证失败！请重新登录！");
+                    MessageBox.Show("无权限或用户认证失败，请重新登录！\r\n");
                     return false;
                 case networkState.SERVER_FAIL_OPERATION:
                     MessageBox.Show("操作失败！请仔细检查并重新尝试！");

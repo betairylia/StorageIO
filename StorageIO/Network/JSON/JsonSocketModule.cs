@@ -18,28 +18,28 @@ namespace StorageIO.Network.JSON
         STORE_EXPORT = 2,           //出货                            //Completed
         STORE_EXCHANGE = 3,         //换货（废弃）                    //Completed
         STORE_BACK = 4,             //退货（废弃）                    //Completed
-        SELL = 5,                   //销售                            
+        SELL = 5,                   //销售                            //Completed
         STORE_VIEW_PRODUCT = 6,     //查看库存                        //Completed
-        STORE_VIEW_IMPORTLOG = 7,   //查看入库记录
-        STORE_VIEW_EXPORTLOG = 8,   //查看出库记录
-        SOLDER_VIEW_SOLDLOG = 9,    //查看销售记录（个人）
-        ADMIN_VIEW_SOLDLOG = 10,    //查看销售记录（管理员）
-        SAVE_ALL_MANULLY = 11,      //保存全部信息
-        CHANGE_PASSWORD = 12,       //用户更改密码
-        CHANGE_PERMISSION = 13,     //更改权限
-        CREATE_USER = 14,           //创建用户
-        GET_PREMISSION = 15,        //登录并获取权限
-        SOLDER_VIEW_CUSTOMER = 16,  //查看客户列表（个人）
-        ADMIN_VIEW_CUSTOMER = 17,   //查看客户列表（管理员）
-        VIEW_ALL_USERS = 18,        //查看用户列表
-        CHANGE_PRODUCTS = 19,       //更改产品
-        CHANGE_IMPORTLOG = 20,      //更改入库信息
-        CHANGE_EXPORTLOG = 21,      //更改出库信息
-        CHANGE_CUSTOMER = 22,       //更改客户信息
-        CHANGE_SOLDLOG = 23,        //更改销售记录
-        PRODUCT_TYPECLASS_LIST = 24,//查看产品类型清单
-        CREATE_CUSTOMER = 25,       //创建新客户
-        DELETE_CUSTOMER = 26,       //删除客户
+        STORE_VIEW_IMPORTLOG = 7,   //查看入库记录                    //Completed
+        STORE_VIEW_EXPORTLOG = 8,   //查看出库记录                    //Completed
+        SOLDER_VIEW_SOLDLOG = 9,    //查看销售记录（个人）            //Completed
+        ADMIN_VIEW_SOLDLOG = 10,    //查看销售记录（管理员）          //Completed
+        SAVE_ALL_MANULLY = 11,      //保存全部信息                    //
+        CHANGE_PASSWORD = 12,       //用户更改密码                    //Completed
+        CHANGE_PERMISSION = 13,     //更改用户权限                    //Completed
+        CREATE_USER = 14,           //创建用户                        //Completed
+        GET_PREMISSION = 15,        //登录并获取权限                  //Completed
+        SOLDER_VIEW_CUSTOMER = 16,  //查看客户列表（个人）            //Completed
+        ADMIN_VIEW_CUSTOMER = 17,   //查看客户列表（管理员）          //Completed
+        VIEW_ALL_USERS = 18,        //查看用户列表                    //Completed
+        CHANGE_PRODUCTS = 19,       //更改产品                        //Completed
+        CHANGE_IMPORTLOG = 20,      //更改入库信息                    //Completed
+        CHANGE_EXPORTLOG = 21,      //更改出库信息                    //Completed
+        CHANGE_CUSTOMER = 22,       //更改客户信息                    //Completed
+        CHANGE_SOLDLOG = 23,        //更改销售记录                    //Completed
+        PRODUCT_TYPECLASS_LIST = 24,//查看产品类型清单                //Completed
+        CREATE_CUSTOMER = 25,       //创建新客户                      //Completed
+        DELETE_CUSTOMER = 26,       //删除客户                        //Completed
     }
 
     public enum networkState
@@ -109,8 +109,11 @@ namespace StorageIO.Network.JSON
 
         public virtual bool CheckIfExists(User user)
         {
-            //从数据库中查询当前这个用户的名字和密码对应的权限是否存在
-            return true;
+            if(user.m_userType <= User.GetUserPermission(user))
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

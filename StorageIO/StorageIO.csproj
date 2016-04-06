@@ -79,16 +79,33 @@
     <Compile Include="LoginPage.Designer.cs">
       <DependentUpon>LoginPage.cs</DependentUpon>
     </Compile>
+    <Compile Include="Network\JSON\ChangeCustomer.cs" />
+    <Compile Include="Network\JSON\ChangeExportLog.cs" />
+    <Compile Include="Network\JSON\ChangeImportLog.cs" />
+    <Compile Include="Network\JSON\ChangePassword.cs" />
+    <Compile Include="Network\JSON\ChangePermission.cs" />
+    <Compile Include="Network\JSON\ChangeProduct.cs" />
+    <Compile Include="Network\JSON\ChangeSoldLog.cs" />
+    <Compile Include="Network\JSON\CreateCustomer.cs" />
+    <Compile Include="Network\JSON\CreateUser.cs" />
     <Compile Include="Network\JSON\ExportFromStore.cs" />
+    <Compile Include="Network\JSON\GetPermission.cs" />
     <Compile Include="Network\JSON\ImportToStore.cs" />
     <Compile Include="Network\JSON\JsonSocketModule.cs" />
     <Compile Include="KeyValueProp.cs" />
     <Compile Include="Invoices\SoldLog.cs" />
     <Compile Include="Money.cs" />
     <Compile Include="Network\ClientSocketBasement.cs" />
+    <Compile Include="Network\JSON\RemoveCustomer.cs" />
+    <Compile Include="Network\JSON\SoldFromStore.cs" />
+    <Compile Include="Network\JSON\ViewExportLog.cs" />
     <Compile Include="Network\JSON\ViewImportLog.cs" />
+    <Compile Include="Network\JSON\ViewProductTypeClass.cs" />
+    <Compile Include="Network\JSON\ViewSoldLog.cs" />
     <Compile Include="Network\JSON\ViewStoreProduct.cs" />
+    <Compile Include="Network\JSON\ViewUserList.cs" />
     <Compile Include="Network\ServerSocketBasement.cs" />
+    <Compile Include="Network\ViewCustomerList.cs" />
     <Compile Include="Permissions\Admin.cs" />
     <Compile Include="Permissions\BaseStoreManager.cs" />
     <Compile Include="Permissions\Permisson.cs" />

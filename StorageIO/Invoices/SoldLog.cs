@@ -11,14 +11,19 @@ namespace StorageIO.Invoices
         public string comments = "";
         public bool taxed;
         public Customer customer;
-        public string storeName;
-        public Money cost;
+        public string storeName;//不显示
+        public List<Money> cost;
         public List<ProductStorage> target;
 
         public SoldLog() { }
-        public SoldLog(Solder _solder, Customer _customer, Store _store, List<ProductStorage> _target, Money cost, bool _taxed, string _comments)
+        public SoldLog(Solder _solder, Customer _customer, Store _store, List<ProductStorage> _target, List<Money> _cost, bool _taxed, string _comments)
         {
-
+            soldsmanName = _solder.userName;
+            cost = _cost;
+            comments = _comments;
+            taxed = _taxed;
+            target = _target;
+            customer = _customer;
         }
 
         //IPrintable

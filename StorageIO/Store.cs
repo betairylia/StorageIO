@@ -25,8 +25,33 @@ namespace StorageIO
 
                 pStorage.m_product = product;
                 pStorage.importCost = cost;
+
                 pStorage.importTime = DateTime.Now;
                 
+                ImportLog log = new ImportLog(pStorage, comments, userName);
+
+                storageList.Add(pStorage);
+                importLogList.Add(log);
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return false;
+            }
+        }
+
+        public bool Import(Product product, Money cost, DateTime time, string comments = "", string userName = "系统")
+        {
+            try
+            {
+                ProductStorage pStorage = new ProductStorage();
+
+                pStorage.m_product = product;
+                pStorage.importCost = cost;
+                
+                pStorage.importTime = time;
+
                 ImportLog log = new ImportLog(pStorage, comments, userName);
 
                 storageList.Add(pStorage);

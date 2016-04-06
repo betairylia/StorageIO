@@ -7,6 +7,12 @@ namespace StorageIO
 {
     public class Customer : IRowShowable, IPrintable
     {
+        public string soldsmanName;
+        public string customerName;
+        public string customerAddress;
+        public string customerTel;
+        public string customerSexual;
+
         //IPrintable
         public string print()
         {

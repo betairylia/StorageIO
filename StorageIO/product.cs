@@ -1,10 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 
 namespace StorageIO
 {
+    public class ProductTypeClass
+    {
+        public string productType;
+        public string productClass;
+        public bool hasMNo;
+    }
+
     public class Product : IRowShowable
     {
         public string productType { get; set; }//类型
@@ -51,5 +59,82 @@ namespace StorageIO
         {
             return !(l == r);
         }
+
+        #region 产品类型
+
+        public static List<ProductTypeClass> productTypeClassList;
+
+        public static void LoadProductTypeClass(string fileName)
+        {
+            try
+            {
+                FileStream file = new FileStream(fileName, FileMode.Open);
+
+                byte[] dataBuffer = new byte[65536];
+                file.Seek(0, SeekOrigin.Begin);
+                file.Read(dataBuffer, 0, 65536);
+
+                productTypeClassList = JsonHelper.DeserializeJsonToList<ProductTypeClass>(
+                    Encoding.Default.GetString(dataBuffer));
+
+                file.Close();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw;
+            }
+        }
+
+        public static void SaveProductTypeClass(string fileName)
+        {
+            try
+            {
+                FileStream file = new FileStream(fileName, FileMode.Create);
+
+                byte[] data = Encoding.Default.GetBytes(JsonHelper.SerializeObject(productTypeClassList));
+                file.Write(data, 0, data.Length);
+
+                file.Flush();
+                file.Close();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw;
+            }
+        }
+
+        public static List<string> GetProductTypes()
+        {
+            List<string> typesList = new List<string>();
+
+            foreach(ProductTypeClass typeClass in productTypeClassList)
+            {
+                if(!typesList.Contains(typeClass.productType))
+                {
+                    typesList.Add(typeClass.productType);
+                }
+            }
+
+            return typesList;
+        }
+
+        public static List<string> GetProductClasses(string type)
+        {
+            List<string> classesList = new List<string>();
+
+            foreach (ProductTypeClass typeClass in productTypeClassList)
+            {
+                if (typeClass.productType == type)
+                {
+                    classesList.Add(typeClass.productClass);
+                }
+            }
+
+            return classesList;
+        }
+
+        #endregion
     }
 }
